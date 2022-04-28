@@ -3,9 +3,10 @@ package com.example.demo.services.serviceBod;
 import com.example.demo.dao.bodDao.bodegaDaoImp;
 import com.example.demo.models.bodegaModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class bodServiceImp implements bodService{
 
     String msg="";

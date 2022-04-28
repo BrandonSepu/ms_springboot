@@ -2,6 +2,7 @@ package com.example.demo.services.serviceBod;
 
 import com.example.demo.models.bodegaModel;
 
+
 import java.util.List;
 
 public interface bodService {

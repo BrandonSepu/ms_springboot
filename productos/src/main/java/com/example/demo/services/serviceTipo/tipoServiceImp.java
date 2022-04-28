@@ -3,9 +3,10 @@ package com.example.demo.services.serviceTipo;
 import com.example.demo.dao.tipDao.tipoDaoImp;
 import com.example.demo.models.tipoModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class tipoServiceImp implements tipoService{
 
     String msg="";

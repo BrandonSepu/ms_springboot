@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface bodegaDaoJpa extends JpaRepository<bodegaModel, Integer> {
 
-    @Query("select * from bodega where id_bod = ?")
-    void getById(int id);
+    //@Query("select * from bodega where id_bod = ?")
+    //void getById(int id);
 }

@@ -3,9 +3,10 @@ package com.example.demo.services.servicePro;
 import com.example.demo.dao.proDao.productDaoImp;
 import com.example.demo.models.productsModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class proServiceImp implements proService{
 
     String msg="";

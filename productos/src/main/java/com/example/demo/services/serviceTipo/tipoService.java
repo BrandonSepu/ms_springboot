@@ -2,6 +2,7 @@ package com.example.demo.services.serviceTipo;
 
 import com.example.demo.models.tipoModel;
 
+
 import java.util.List;
 
 public interface tipoService {

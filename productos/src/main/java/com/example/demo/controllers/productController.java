@@ -16,8 +16,8 @@ public class productController {
     @Autowired
     proService pService;
 
-    @RequestMapping("/welcome")
-    public String welcomepage() {
+    @RequestMapping("/welcome2")
+    public String welcomepage2() {
         return "Bienvenido a mi api";
     }
 
@@ -31,7 +31,7 @@ public class productController {
         return pService.getProduct(id);
     }
 
-    @PostMapping(value = "/loadInBodega", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
+    @PostMapping(value = "/loadProducto", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
     public String loadProducto(@RequestBody productsModel newPro) {
         return String.valueOf(pService.createProduct(newPro));
     }

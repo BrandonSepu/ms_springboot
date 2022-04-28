@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface tipoDaoJpa extends JpaRepository<tipoModel, Integer> {
 
-    @Query("select * from tipo where id_tipo = ?")
-    void getById(int id);
+    //@Query("select * from tipo where id_tipo = ?")
+    //void getById(int id);
 }

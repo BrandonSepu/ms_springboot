@@ -16,8 +16,8 @@ public class tipoController {
     @Autowired
     tipoService tService;
 
-    @RequestMapping("/welcome")
-    public String welcomepage() {
+    @RequestMapping("/welcome3")
+    public String welcomepage3() {
         return "Bienvenido a mi api";
     }
 
@@ -31,7 +31,7 @@ public class tipoController {
         return tService.gettipo(id);
     }
 
-    @PostMapping(value = "/loadInBodega", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
+    @PostMapping(value = "/loadTipo", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
     public String loadTipo(@RequestBody tipoModel newTipo) {
         return String.valueOf(tService.createtipo(newTipo));
     }

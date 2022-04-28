@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface productDaoJpa extends JpaRepository<productsModel, Integer> {
 
-    @Query("select * from productos where id_pro = ?")
-    void getById(int id);
+    //@Query("select * from productos where id_pro = ?")
+    //void getById(int id);
 }
