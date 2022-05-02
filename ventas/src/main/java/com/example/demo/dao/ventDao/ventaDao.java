@@ -1,4 +1,4 @@
-package com.example.demo.dao.bodDao;
+package com.example.demo.dao.ventDao;
 
 import com.example.demo.models.ventasModel;
 import org.springframework.stereotype.Component;
@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface bodegaDao {
+public interface ventaDao {
 
-    void createBodegaPro(ventasModel bodega);
+    void createVenta(ventasModel venta);
 
-    List<ventasModel> getAllBodegaPro();
+    List<ventasModel> getAllVenta();
 
     void delBodegaPro(int idBod);
 

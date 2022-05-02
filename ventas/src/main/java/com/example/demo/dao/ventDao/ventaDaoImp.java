@@ -1,4 +1,4 @@
-package com.example.demo.dao.bodDao;
+package com.example.demo.dao.ventDao;
 
 import com.example.demo.models.ventasModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +9,18 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class bodegaDaoImp implements bodegaDao{
+public class ventaDaoImp implements ventaDao {
 
     @Autowired
-    bodegaDaoJpa bodJpa;
+    ventaDaoJpa bodJpa;
 
     @Override
-    public void createBodegaPro(ventasModel bodega) {
-        bodJpa.save(bodega);
+    public void createVenta(ventasModel venta) {
+        bodJpa.save(venta);
     }
 
     @Override
-    public List<ventasModel> getAllBodegaPro() {
+    public List<ventasModel> getAllVenta() {
         return bodJpa.findAll();
     }
 

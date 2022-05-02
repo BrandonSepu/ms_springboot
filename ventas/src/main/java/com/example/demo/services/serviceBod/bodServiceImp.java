@@ -1,6 +1,6 @@
 package com.example.demo.services.serviceBod;
 
-import com.example.demo.dao.bodDao.bodegaDaoImp;
+import com.example.demo.dao.ventDao.ventaDaoImp;
 import com.example.demo.models.ventasModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +12,13 @@ public class bodServiceImp implements bodService{
     String msg="";
 
     @Autowired
-    bodegaDaoImp daoBodImp;
+    ventaDaoImp daoBodImp;
 
 
     @Override
     public boolean createBodegaPro(ventasModel bodega) {
         if(daoBodImp.getBodegaPro(bodega.getId_bod())==null) {
-            daoBodImp.createBodegaPro(bodega);
+            daoBodImp.createVenta(bodega);
             msg = "producto agregado a la bodega correctamente";
             System.out.println(msg);
             return true;
@@ -33,7 +33,7 @@ public class bodServiceImp implements bodService{
     public List<ventasModel> getAllBodegaPro() {
         msg = "productos de la bodega encontrados";
         System.out.println(msg);
-        return daoBodImp.getAllBodegaPro();
+        return daoBodImp.getAllVenta();
     }
 
     @Override

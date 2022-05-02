@@ -4,71 +4,82 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="productos")
+@Table(name="detalle_ven")
 public class detalleVenModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "id_pro")
-    private int id_pro;
-    @Column(name = "nom_pro")
-    private String nom_pro;
-    @Column(name = "des_pro")
-    private String des_pro;
-    @Column(name = "pric_pro")
-    private String pric_pro;
-    @Column(name = "tipo_id_tipo")
-    private String tipo_id_tipo;
+    @Column(name = "id_detven")
+    private int id_detven;
+    @Column(name = "producto_det")
+    private String producto_det;
+    @Column(name = "user_det")
+    private String user_det;
+    @Column(name = "hora_det")
+    private String hora_det;
+    @Column(name = "fecha_det")
+    private String fecha_det;
+    @Column(name = "tipopago_id_tpag")
+    private String tipopago_id_tpag;
 
     public detalleVenModel() {
     }
 
-    public detalleVenModel(String nom_pro, String des_pro, String pric_pro, String tipo_id_tipo) {
-        this.nom_pro = nom_pro;
-        this.des_pro = des_pro;
-        this.pric_pro = pric_pro;
-        this.tipo_id_tipo = tipo_id_tipo;
+    public detalleVenModel(String producto_det, String user_det, String hora_det, String fecha_det, String tipopago_id_tpag) {
+        this.producto_det = producto_det;
+        this.user_det = user_det;
+        this.hora_det = hora_det;
+        this.fecha_det = fecha_det;
+        this.tipopago_id_tpag = tipopago_id_tpag;
     }
 
-    public int getId_pro() {
-        return id_pro;
+    public int getId_ven() {
+        return id_detven;
     }
 
-    public void setId_pro(int id_pro) {
-        this.id_pro = id_pro;
+    public void setId_ven(int id_detven) {
+        this.id_detven = id_detven;
     }
 
-    public String getNom_pro() {
-        return nom_pro;
+    public String getProducto_det() {
+        return producto_det;
     }
 
-    public void setNom_pro(String nom_pro) {
-        this.nom_pro = nom_pro;
+    public void setProducto_det(String producto_det) {
+        this.producto_det = producto_det;
     }
 
-    public String getDes_pro() {
-        return des_pro;
+    public String getUser_det() {
+        return user_det;
     }
 
-    public void setDes_pro(String des_pro) {
-        this.des_pro = des_pro;
+    public void setUser_det(String user_det) {
+        this.user_det = user_det;
     }
 
-    public String getPric_pro() {
-        return pric_pro;
+    public String getHora_det() {
+        return hora_det;
     }
 
-    public void setPric_pro(String pric_pro) {
-        this.pric_pro = pric_pro;
+    public void setHora_det(String hora_det) {
+        this.hora_det = hora_det;
     }
 
-    public String getTipo_id_tipo() {
-        return tipo_id_tipo;
+    public String getFecha_det() {
+        return fecha_det;
     }
 
-    public void setTipo_id_tipo(String tipo_id_tipo) {
-        this.tipo_id_tipo = tipo_id_tipo;
+    public void setFecha_det(String fecha_det) {
+        this.fecha_det = fecha_det;
+    }
+
+    public String getTipopago_id_tpag() {
+        return tipopago_id_tpag;
+    }
+
+    public void setTipopago_id_tpag(String tipopago_id_tpag) {
+        this.tipopago_id_tpag = tipopago_id_tpag;
     }
 }

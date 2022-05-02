@@ -13,29 +13,29 @@ public class tipoPagoModel implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id_tpag")
     private int id_tpag;
-    @Column(name = "pago")
-    private String nom_tipo;
+    @Column(name = "pago_tpag")
+    private String pago_tpag;
 
     public tipoPagoModel() {
     }
 
-    public tipoPagoModel(String nom_tipo) {
-        this.nom_tipo = nom_tipo;
+    public tipoPagoModel(String pago_tpag) {
+        this.pago_tpag = pago_tpag;
     }
 
-    public int getId_tipo() {
-        return id_tipo;
+    public int getId_tpag() {
+        return id_tpag;
     }
 
-    public void setId_tipo(int id_tipo) {
-        this.id_tipo = id_tipo;
+    public void setId_tpag(int id_tpag) {
+        this.id_tpag = id_tpag;
     }
 
-    public String getNom_tipo() {
-        return nom_tipo;
+    public String getPago_tpag() {
+        return pago_tpag;
     }
 
-    public void setNom_tipo(String nom_tipo) {
-        this.nom_tipo = nom_tipo;
+    public void setPago_tpag(String pago_tpag) {
+        this.pago_tpag = pago_tpag;
     }
 }
