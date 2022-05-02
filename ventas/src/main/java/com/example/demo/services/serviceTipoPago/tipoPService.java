@@ -1,4 +1,4 @@
-package com.example.demo.services.servicePro;
+package com.example.demo.services.serviceTipoPago;
 
 import com.example.demo.models.tipoPagoModel;
 

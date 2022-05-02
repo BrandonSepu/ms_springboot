@@ -12,27 +12,27 @@ import java.util.List;
 public class detVenDaoImp implements detVenDao {
 
     @Autowired
-    detVenDaoJpa proJpa;
+    detVenDaoJpa detVenJpa;
 
     @Override
     public void createDetVen(detalleVenModel detVen) {
-        proJpa.save(detVen);
+        detVenJpa.save(detVen);
     }
 
     @Override
     public List<detalleVenModel> getAllDetVen() {
-        return proJpa.findAll();
+        return detVenJpa.findAll();
     }
 
     @Override
     public void delDetVen(int idDetVen) {
-        proJpa.deleteById(idDetVen);
+        detVenJpa.deleteById(idDetVen);
     }
 
     @Override
     public detalleVenModel getDetVen(int idDetVen) {
         try{
-            return proJpa.findById(idDetVen).orElse(null);
+            return detVenJpa.findById(idDetVen).orElse(null);
         }catch (Exception e){
             e.getMessage();
             return null;
@@ -41,6 +41,6 @@ public class detVenDaoImp implements detVenDao {
 
     @Override
     public void updateDetVen(detalleVenModel detVen) {
-        proJpa.save(detVen);
+        detVenJpa.save(detVen);
     }
 }

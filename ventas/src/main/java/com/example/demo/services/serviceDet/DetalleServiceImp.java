@@ -1,6 +1,6 @@
 package com.example.demo.services.serviceDet;
 
-import com.example.demo.dao.ventDao.ventaDaoImp;
+import com.example.demo.dao.detalleVenDao.detVenDaoImp;
 import com.example.demo.models.detalleVenModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +12,13 @@ public class DetalleServiceImp implements DetalleService{
     String msg="";
 
     @Autowired
-    ventaDaoImp daoBodImp;
+    detVenDaoImp daoDetVenImp;
 
 
     @Override
     public boolean createDetalleVenta(detalleVenModel DetalleVenta) {
-        if(daoBodImp.getDetalleVenta(DetalleVenta.getid_detven())==null) {
-            daoBodImp.createDetalleVenta(DetalleVenta);
+        if(daoDetVenImp.getDetVen(DetalleVenta.getId_detVen())==null) {
+            daoDetVenImp.createDetVen(DetalleVenta);
             msg = "Detalle de venta agregado a la bodega correctamente";
             System.out.println(msg);
             return true;
@@ -33,13 +33,13 @@ public class DetalleServiceImp implements DetalleService{
     public List<detalleVenModel> getAllDetalleVenta() {
         msg = "Detalles de venta de la bodega encontrados";
         System.out.println(msg);
-        return daoBodImp.getAllDetalleVenta();
+        return daoDetVenImp.getAllDetVen();
     }
 
     @Override
     public boolean delDetalleVenta(int id_detven) {
-        if(daoBodImp.getDetalleVenta(id_detven)!=null) {
-            daoBodImp.delDetalleVenta(id_detven);
+        if(daoDetVenImp.getDetVen(id_detven)!=null) {
+            daoDetVenImp.delDetVen(id_detven);
             msg = "Detalle de venta eliminado completamente";
             System.out.println(msg);
             return true;
@@ -54,13 +54,13 @@ public class DetalleServiceImp implements DetalleService{
     public detalleVenModel getDetalleVenta(int id_detven) {
         msg = "Detalle de venta encontrado";
         System.out.println(msg);
-        return daoBodImp.getDetalleVenta(id_detven);
+        return daoDetVenImp.getDetVen(id_detven);
     }
 
     @Override
     public void updateDetalleVenta(detalleVenModel DetalleVenta) {
-        if (daoBodImp.getDetalleVenta(DetalleVenta.id_detven())!=null){
-            daoBodImp.updateDetalleVenta(DetalleVenta);
+        if (daoDetVenImp.getDetVen(DetalleVenta.getId_detVen())!=null){
+            daoDetVenImp.updateDetVen(DetalleVenta);
         };
         msg = "Detalle de venta no encontrado";
         System.out.println(msg);

@@ -35,11 +35,11 @@ public class detalleVenModel implements Serializable{
         this.tipopago_id_tpag = tipopago_id_tpag;
     }
 
-    public int getId_ven() {
+    public int getId_detVen() {
         return id_detven;
     }
 
-    public void setId_ven(int id_detven) {
+    public void setId_detVen(int id_detven) {
         this.id_detven = id_detven;
     }
 

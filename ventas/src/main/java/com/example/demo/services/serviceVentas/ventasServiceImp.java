@@ -1,6 +1,6 @@
 package com.example.demo.services.serviceVentas;
 
-import com.example.demo.dao.tipDao.tipoDaoImp;
+import com.example.demo.dao.ventDao.VentaDaoImp;
 import com.example.demo.models.ventasModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,12 @@ public class ventasServiceImp implements ventasService{
     String msg="";
 
     @Autowired
-    tipoDaoImp daotipoImp;
+    VentaDaoImp daoVenImp;
 
     @Override
     public boolean createventas(ventasModel ventas) {
-        if(daotipoImp.getventas(ventas.getid_ventas())==null) {
-            daotipoImp.createventas(ventas);
+        if(daoVenImp.getVenta(ventas.getId_ventas())==null) {
+            daoVenImp.createVenta(ventas);
             msg = "ventas agregadas correctamente";
             System.out.println(msg);
             return true;
@@ -31,13 +31,13 @@ public class ventasServiceImp implements ventasService{
     public List<ventasModel> getAllventas() {
         msg = "ventas encontradas";
         System.out.println(msg);
-        return daotipoImp.getAllventas();
+        return daoVenImp.getAllVenta();
     }
 
     @Override
     public boolean delventas(int id_ventas) {
-        if(daotipoImp.getventas(id_ventas)!=null) {
-            daotipoImp.delventas(id_ventas);
+        if(daoVenImp.getVenta(id_ventas)!=null) {
+            daoVenImp.delVenta(id_ventas);
             msg = "ventas eliminadas completamente";
             System.out.println(msg);
             return true;
@@ -51,22 +51,17 @@ public class ventasServiceImp implements ventasService{
     public ventasModel getventas(int id_ventas) {
         msg = "ventas encontradas";
         System.out.println(msg);
-        return daotipoImp.getventas(id_ventas);
+        return daoVenImp.getVenta(id_ventas);
     }
 
     @Override
     public void updateventas(ventasModel ventas) {
-        if (daotipoImp.getventas(ventas.getid_ventas())!=null){
-            daotipoImp.updateventas(ventas);
+        if (daoVenImp.getVenta(ventas.getId_ventas())!=null){
+            daoVenImp.updateVenta(ventas);
             msg = "ventas encontradas";
         };
         msg = "ventas no encontradas";
         System.out.println(msg);
     }
 
-    @Override
-    public List<ventasModel> getAlltipo() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

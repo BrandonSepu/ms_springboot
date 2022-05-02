@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ventaDaoImp implements ventaDao {
+public class VentaDaoImp implements ventaDao {
 
     @Autowired
     ventaDaoJpa bodJpa;
