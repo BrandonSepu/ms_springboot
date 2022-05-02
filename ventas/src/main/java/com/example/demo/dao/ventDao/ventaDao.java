@@ -12,9 +12,9 @@ public interface ventaDao {
 
     List<ventasModel> getAllVenta();
 
-    void delBodegaPro(int idBod);
+    void delVenta(int idVen);
 
-    ventasModel getBodegaPro(int idBod);
+    ventasModel getVenta(int idVen);
 
-    void updateBodegaPro(ventasModel bodega);
+    void updateVenta(ventasModel venta);
 }

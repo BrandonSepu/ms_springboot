@@ -1,6 +1,6 @@
 package com.example.demo.services.servicePro;
 
-import com.example.demo.dao.proDao.productDaoImp;
+import com.example.demo.dao.detalleVenDao.detVenDaoImp;
 import com.example.demo.models.detalleVenModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,12 @@ public class proServiceImp implements proService{
     String msg="";
 
     @Autowired
-    productDaoImp daoProImp;
+    detVenDaoImp daoProImp;
 
     @Override
     public boolean createProduct(detalleVenModel product) {
-        if(daoProImp.getProduct(product.getId_pro())==null) {
-            daoProImp.createProduct(product);
+        if(daoProImp.getDetVen(product.getId_pro())==null) {
+            daoProImp.createDetVen(product);
             msg = "producto agregado correctamente";
             System.out.println(msg);
             return true;
@@ -31,13 +31,13 @@ public class proServiceImp implements proService{
     public List<detalleVenModel> getAllProduct() {
         msg = "productos encontrados";
         System.out.println(msg);
-        return daoProImp.getAllProduct();
+        return daoProImp.getAllDetVen();
     }
 
     @Override
     public boolean delProduct(int idPro) {
-        if(daoProImp.getProduct(idPro)!=null) {
-            daoProImp.delProduct(idPro);
+        if(daoProImp.getDetVen(idPro)!=null) {
+            daoProImp.delDetVen(idPro);
             msg = "producto eliminado completamente";
             System.out.println(msg);
             return true;
@@ -51,13 +51,13 @@ public class proServiceImp implements proService{
     public detalleVenModel getProduct(int idPro) {
         msg = "producto encontrado";
         System.out.println(msg);
-        return daoProImp.getProduct(idPro);
+        return daoProImp.getDetVen(idPro);
     }
 
     @Override
     public void updateProduct(detalleVenModel product) {
-        if (daoProImp.getProduct(product.getId_pro())!=null){
-            daoProImp.updateProduct(product);
+        if (daoProImp.getDetVen(product.getId_pro())!=null){
+            daoProImp.updateDetVen(product);
             msg = "producto encontrado";
         };
         msg = "producto no encontrado";

@@ -1,4 +1,4 @@
-package com.example.demo.dao.tipDao;
+package com.example.demo.dao.tipoPagoDao;
 
 import com.example.demo.models.tipoPagoModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,30 +9,30 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class tipoDaoImp implements tipoDao{
+public class tPagoDaoImp implements tPagoDao {
 
     @Autowired
-    tipoDaoJpa tipoJpa;
+    tPagoDaoJpa tipoJpa;
 
     @Override
-    public void createtipo(tipoPagoModel tipo) {
-        tipoJpa.save(tipo);
+    public void createTPago(tipoPagoModel tPago) {
+        tipoJpa.save(tPago);
     }
 
     @Override
-    public List<tipoPagoModel> getAlltipo() {
+    public List<tipoPagoModel> getAllTPago() {
         return tipoJpa.findAll();
     }
 
     @Override
-    public void deltipo(int idTipo) {
-        tipoJpa.deleteById(idTipo);
+    public void delTPago(int idTPago) {
+        tipoJpa.deleteById(idTPago);
     }
 
     @Override
-    public tipoPagoModel gettipo(int idTipo) {
+    public tipoPagoModel getTPago(int idTPago) {
         try{
-            return tipoJpa.findById(idTipo).orElse(null);
+            return tipoJpa.findById(idTPago).orElse(null);
         }catch (Exception e){
             e.getMessage();
             return null;
@@ -40,7 +40,7 @@ public class tipoDaoImp implements tipoDao{
     }
 
     @Override
-    public void updatetipo(tipoPagoModel tipo) {
-        tipoJpa.save(tipo);
+    public void updateTPago(tipoPagoModel tPago) {
+        tipoJpa.save(tPago);
     }
 }

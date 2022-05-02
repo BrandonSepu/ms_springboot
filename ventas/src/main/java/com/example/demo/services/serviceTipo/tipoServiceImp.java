@@ -1,6 +1,6 @@
 package com.example.demo.services.serviceTipo;
 
-import com.example.demo.dao.tipDao.tipoDaoImp;
+import com.example.demo.dao.tipoPagoDao.tPagoDaoImp;
 import com.example.demo.models.tipoPagoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,12 @@ public class tipoServiceImp implements tipoService{
     String msg="";
 
     @Autowired
-    tipoDaoImp daotipoImp;
+    tPagoDaoImp daotipoImp;
 
     @Override
     public boolean createtipo(tipoPagoModel tipo) {
-        if(daotipoImp.gettipo(tipo.getId_tipo())==null) {
-            daotipoImp.createtipo(tipo);
+        if(daotipoImp.getTPago(tipo.getId_tipo())==null) {
+            daotipoImp.createTPago(tipo);
             msg = "tipo agregado correctamente";
             System.out.println(msg);
             return true;
@@ -31,13 +31,13 @@ public class tipoServiceImp implements tipoService{
     public List<tipoPagoModel> getAlltipo() {
         msg = "tipos encontrados";
         System.out.println(msg);
-        return daotipoImp.getAlltipo();
+        return daotipoImp.getAllTPago();
     }
 
     @Override
     public boolean deltipo(int idTipo) {
-        if(daotipoImp.gettipo(idTipo)!=null) {
-            daotipoImp.deltipo(idTipo);
+        if(daotipoImp.getTPago(idTipo)!=null) {
+            daotipoImp.delTPago(idTipo);
             msg = "tipo eliminado completamente";
             System.out.println(msg);
             return true;
@@ -51,13 +51,13 @@ public class tipoServiceImp implements tipoService{
     public tipoPagoModel gettipo(int idTipo) {
         msg = "tipo encontrado";
         System.out.println(msg);
-        return daotipoImp.gettipo(idTipo);
+        return daotipoImp.getTPago(idTipo);
     }
 
     @Override
     public void updatetipo(tipoPagoModel tipo) {
-        if (daotipoImp.gettipo(tipo.getId_tipo())!=null){
-            daotipoImp.updatetipo(tipo);
+        if (daotipoImp.getTPago(tipo.getId_tipo())!=null){
+            daotipoImp.updateTPago(tipo);
             msg = "tipo encontrado";
         };
         msg = "tipo no encontrado";

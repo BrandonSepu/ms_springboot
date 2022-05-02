@@ -25,14 +25,14 @@ public class ventaDaoImp implements ventaDao {
     }
 
     @Override
-    public void delBodegaPro(int idBod) {
-        bodJpa.deleteById(idBod);
+    public void delVenta(int idVen) {
+        bodJpa.deleteById(idVen);
     }
 
     @Override
-    public ventasModel getBodegaPro(int idBod) {
+    public ventasModel getVenta(int idVen) {
         try{
-            return bodJpa.findById(idBod).orElse(null);
+            return bodJpa.findById(idVen).orElse(null);
         }catch (Exception e){
             e.getMessage();
             return null;
@@ -40,7 +40,7 @@ public class ventaDaoImp implements ventaDao {
     }
 
     @Override
-    public void updateBodegaPro(ventasModel bodega) {
-        bodJpa.save(bodega);
+    public void updateVenta(ventasModel venta) {
+        bodJpa.save(venta);
     }
 }

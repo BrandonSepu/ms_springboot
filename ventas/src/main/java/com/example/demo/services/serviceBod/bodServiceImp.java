@@ -17,7 +17,7 @@ public class bodServiceImp implements bodService{
 
     @Override
     public boolean createBodegaPro(ventasModel bodega) {
-        if(daoBodImp.getBodegaPro(bodega.getId_bod())==null) {
+        if(daoBodImp.getVenta(bodega.getId_bod())==null) {
             daoBodImp.createVenta(bodega);
             msg = "producto agregado a la bodega correctamente";
             System.out.println(msg);
@@ -38,8 +38,8 @@ public class bodServiceImp implements bodService{
 
     @Override
     public boolean delBodegaPro(int idBod) {
-        if(daoBodImp.getBodegaPro(idBod)!=null) {
-            daoBodImp.delBodegaPro(idBod);
+        if(daoBodImp.getVenta(idBod)!=null) {
+            daoBodImp.delVenta(idBod);
             msg = "producto de a bodega eliminado completamente";
             System.out.println(msg);
             return true;
@@ -54,13 +54,13 @@ public class bodServiceImp implements bodService{
     public ventasModel getBodegaPro(int idBod) {
         msg = "producto de bodega encontrado";
         System.out.println(msg);
-        return daoBodImp.getBodegaPro(idBod);
+        return daoBodImp.getVenta(idBod);
     }
 
     @Override
     public void updateBodegaPro(ventasModel bodega) {
-        if (daoBodImp.getBodegaPro(bodega.getId_bod())!=null){
-            daoBodImp.updateBodegaPro(bodega);
+        if (daoBodImp.getVenta(bodega.getId_bod())!=null){
+            daoBodImp.updateVenta(bodega);
         };
         msg = "producto de bodega no encontrado";
         System.out.println(msg);
