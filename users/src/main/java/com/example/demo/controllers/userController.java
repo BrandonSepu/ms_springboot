@@ -1,4 +1,5 @@
 package com.example.demo.controllers;
+import com.example.demo.dao.userDaoJpa;
 import com.example.demo.models.userModel;
 import com.example.demo.services.userService;
 import com.example.demo.services.userServiceImp;
@@ -17,6 +18,9 @@ public class userController {
     @Autowired
     userService uService;
 
+    @Autowired
+    userDaoJpa jpa;
+
     @RequestMapping("/welcome")
     public String welcomepage() {
         return "Welcome to Yawin Tutor";
@@ -31,6 +35,11 @@ public class userController {
     public userModel recuperarUser(@PathVariable("id") int id) {
         return uService.buscarUsuario(id);
     }
+
+    //@GetMapping(value = "/user/{rut}", produces = MediaType.APPLICATION_JSON_VALUE)
+    //public userModel getbyrut(@PathVariable("rut") String rut) {
+    //    return (userModel) jpa.getByRut(rut);
+    //}
 
     @PostMapping(value = "/load", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
     public String saveUser(@RequestBody userModel user1) {

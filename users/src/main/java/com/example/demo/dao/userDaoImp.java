@@ -52,4 +52,8 @@ public class userDaoImp implements userDao{
     public void actualizarUser(userModel user) {
         userjpa.save(user);
     }
+
+    //public void findByRut(String rut){
+      //  userjpa.getByRut(rut);
+    //}
 }
