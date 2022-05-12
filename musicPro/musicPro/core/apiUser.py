@@ -2,10 +2,6 @@ from pprint import pprint
 import requests
 import json
 
-from requests import request
-import requests
-import urllib3
-
 
 def getAllUsers():
     key="users"
@@ -80,15 +76,9 @@ def loadUser(nom_user,rut_user,age_user,tipo_user,email_user,pass_user):
     
     url="https://springbootusers.herokuapp.com/load"
     try:
-        data = {'nom_user':nom_user,
-                'rut_user':rut_user,
-                'age_user':age_user,
-                'tipo_user':tipo_user,
-                'email_user':email_user,
-                'pass_user':pass_user
-                }
-        response = requests.post(url, json = data)
-        print("se logró"+ str(response))   
+        dato = {"nom_user":"vanesita","rut_user":"20447641-2","age_user":"21","tipo_user":"bodeguera","email_user":"val11e@gmail.com","pass_user":"vane"}
+        response = requests.post(url, json = dato )
+        print("se logró"+ str(response)) 
     except Exception as e:
         print("No se logró")
         print(e)
@@ -96,5 +86,5 @@ def loadUser(nom_user,rut_user,age_user,tipo_user,email_user,pass_user):
         pprint(data)
     return  response  
 
-loadUser('Vanesia','243326141-1',21,'vendedora','vane@gmail.com', 'vane')  
-#getAllUsers()
+#loadUser("Vanesia","243126141-2","21","bodeguera","val11e@gmail.com","vane")  
+getAllUsers()
