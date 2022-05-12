@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Pro</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+ 
+    {% block css %}
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+    {% endblock css %}
+
+    
+</head>
+<body>
+    
+    <!--NAVBAR-->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="{% url 'index' %}">
+        <img class="imglogo"src="{% static 'app/img/logo.png'%}" width="105" height="40" class="d-inline-block align-top" alt="logo">
+    </a>
+    <a class="navbar-brand" href="{% url 'index' %}">Music Pro</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only"></span></a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'productos' %}">Productos<span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="">Iniciar sesion</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'productos' %}">Nosotros</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'productos' %}">Contáctanos</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+    <!--Contenido-->
+
+    {% block contenido %}
+
+    {% endblock contenido %}
+
+    <!--Footer-->
+
+    <footer class="footer">
+      <div class="container">
+      <div class="row">
+      <div class=" col-sm-4 col-md col-sm-8  col-12 col">
+      <h5 class="headin5_amrc col_white_amrc pt2">Music Pro</h5>
+      <!--headin5_amrc-->
+      <p class="mb10">Nuestro propósito es Acoger, Cuidar y Sanar a las familias de Chile, entregándoles salud de calidad y atención cálida y conveniente, a lo largo del país.</p>
+      <p><i class="fa fa-location-arrow"></i> Nos ubicamos en: <br> Santa María 2321, Peñalolen</p>
+      <p><i class="fa fa-phone"></i>  +56931189636  </p>
+      <p><i class="fa fa fa-envelope"></i> CmediGalenos@gmail.com </p>
+      </div>
+  
+      <div class=" col-sm-4 col-md col-7 col">
+      <h5 class="headin5_amrc col_white_amrc pt2">MAPA</h5>
+      <!--headin5_amrc-->
+      <div><img src="{% static 'app/img/mapa.png'%}" width="180" height="200" alt="mapa de la empresa"></div>
+      <!--footer_ul_amrc ends here-->
+      </div>
+      
+      <div class=" col-sm-4 col-md  col-8 col">
+      <h5 class="headin5_amrc col_white_amrc pt2">Redes Sociales</h5>
+      <!--headin5_amrc-->
+      <ul class="footer_ul_amrc">
+      <div><img src="{% static 'app/img/facebook.png'%}" width="30" height="30" alt="mapa de la empresa"> Medic Plus</div>
+      <div><img src="{% static 'app/img/instagram.png'%}" width="30" height="30" alt="instagram"> Medic_Plus</div>
+      <div><img src="{% static 'app/img/twitter.png'%}" width="30" height="30" alt="twitter"> Medic_Plus</div>
+      <div><img src="{% static 'app/img/whatsapp.png'%}" width="30" height="30" alt="whatsapp">  +56 931189636</div>
+      </ul>
+      <!--footer_ul_amrc ends here-->
+      </div>
+      
+      
+      <div class=" col-sm-4 col-md  col-12 col">
+      <!--headin5_amrc ends here-->
+      <h5 class="headin5_amrc col_white_amrc pt2">Logo</h5>
+      <ul class="footer_ul2_amrc">
+      <div><img class="img" src="{% static 'app/img/logo.png'%}" width="200" height="200" alt="logo de la empresa"></div>
+      </ul>
+      <!--footer_ul2_amrc ends here-->
+      </div>
+      </div>
+      <ul class="foote_bottom_ul_amrc">
+        <li><a href="{% url 'productos' %}">Home</a></li>
+        <li><a href="{% url 'productos' %}">Reserva tu hora</a></li>
+        <li><a href="">Examenes</a></li>
+        <li><a href="">Especialistas</a></li>
+      </ul>
+        <!--foote_bottom_ul_amrc ends here-->
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</body>
+</html>
