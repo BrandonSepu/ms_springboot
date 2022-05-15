@@ -1,7 +1,5 @@
 from django.shortcuts import render
-
-# Create your views here.
-
+from core.apiUser import login
 #from .utils import render_to_pdf, sendEmail
 #from django.http import HttpResponse
 #from .forms import contactForm, paceinteForm, horaMedicaForm
@@ -18,3 +16,10 @@ def index(request):
 
 def productos(request):
     return render(request, 'web/productos.html')
+
+def log_in(request):
+    email1 = request["username"]
+    print(email1 + " " + pass1)
+    pass1 = request["password"]
+    #context = login(email1,pass1)
+    return render(request, 'web/login.html')
