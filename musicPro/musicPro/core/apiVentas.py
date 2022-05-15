@@ -3,10 +3,10 @@ import requests
 import json
 
 
-def getAllUsers():
+def getAllVentas():
     try:
-        key="users"
-        url="https://springbootusers.herokuapp.com/" + key
+        key="ventas"
+        url="https://springbootventas.herokuapp.com/" + key
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             data = respuesta.json()
@@ -18,12 +18,12 @@ def getAllUsers():
     except Exception as e:
         print(e)
 
-#getAllUsers()
+#getAllVentas()
 
-def getUser(id):
+def getVenta(id):
 
     try:
-        url="https://springbootusers.herokuapp.com/user/"+ str(id)
+        url="https://springbootventas.herokuapp.com/venta/"+ str(id)
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             print(print("se logró"+ str(respuesta)))
@@ -37,7 +37,7 @@ def getUser(id):
     except Exception as e:
         print(e)
 
-#getUser(4)
+#getVenta(1)
 
 def getUserByEmail(email):
     try:
@@ -68,42 +68,13 @@ def getUserByEmail(email):
         
 #getUserByEmail("brandonsepux@gmail.com");
 
-def login(email, password):
-    try:
-        key="users"
-        url="https://springbootusers.herokuapp.com/" + key
-        respuesta = requests.get(url)
-        if respuesta.status_code == 200:
-            print(print("se logró"+ str(respuesta)))
-            data = respuesta.json()
-
-            for i in data:
-                #print(i["email_user"])
-                if i["email_user"] == email and i["pass_user"] == password:
-                    print("lo encontre, usuario logueado")
-                    data = i
-                    pprint(data)
-                    break
-                else:
-                    print("NO lo encontre, clave o email incorrectos")
-                    data = False
-                    pprint(data)
-                    break
-        else:
-            print(print("NO se logró, id no encontrada"+ str(respuesta)))
-        return data 
-    except Exception as e:
-        print(e)
-    
-#login("brandonsepux@gmail.com", "cesariño")
-
-def loadUser(nom_user,rut_user,age_user,tipo_user,email_user,pass_user):
+def loadVenta(product_id,user_id,detalle_ven_id_detven):
     try:
         url="https://springbootusers.herokuapp.com/load"
         respuesta = False
     
-        if len(rut_user) <= 10:
-            dato = {"nom_user":nom_user,"rut_user":rut_user,"age_user":age_user,"tipo_user":tipo_user,"email_user":email_user,"pass_user":pass_user}
+        if len(product_id) <= 10:
+            dato = {"product_id": product_id,"user_id": user_id,"detalle_ven_id_detven": detalle_ven_id_detven}
             respuesta = requests.post(url, json = dato )
             if respuesta.status_code == 200:
                 print(print("se logró"+ str(respuesta)))
@@ -119,7 +90,7 @@ def loadUser(nom_user,rut_user,age_user,tipo_user,email_user,pass_user):
     return  respuesta
       
 
-#loadUser("Vanesuki","21126141-2","21","vendedora","vanesuki@gmail.com","vane")  
+#loadUser("Vanesuki","21126141-2","21")  
 
 def updateUser(id_user,nom_user,rut_user,age_user,tipo_user,email_user,pass_user):
     try:
