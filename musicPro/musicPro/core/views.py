@@ -18,7 +18,7 @@ def productos(request):
     return render(request, 'web/productos.html')
 
 def log_in(request):
-    email1 = request["username"]
+    
     print(email1 + " " + pass1)
     pass1 = request["password"]
     #context = login(email1,pass1)
