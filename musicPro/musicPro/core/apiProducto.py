@@ -39,7 +39,7 @@ def getProducto(id):
 
 #getProducto(4)
 
-def getUserByType(email):
+def getProByType(tipo):
     try:
         key="productos"
         url="https://springbootproductos.herokuapp.com/" + key
@@ -49,8 +49,8 @@ def getUserByType(email):
             print(print("se logró"+ str(respuesta)))
             data = respuesta.json()
             for i in data:
-                print(i["email_user"])
-                if i["email_user"] == email:
+                print(i["tipo_id_tipo"])
+                if i["tipo_id_tipo"] == tipo:
                     print("lo encontre")
                     data = i
                     print(data)
@@ -66,8 +66,7 @@ def getUserByType(email):
     except Exception as e:
         print(e)
         
-#getUserByEmail("brandonsepux@gmail.com");
-
+#getProByType(1); 
 
 def loadProducto(nom_pro,des_pro,pric_pro,tipo_id_tipo):
     try:
@@ -91,7 +90,7 @@ def loadProducto(nom_pro,des_pro,pric_pro,tipo_id_tipo):
     return  respuesta
       
 
-loadProducto("batería","Con sonidos fuertes, marca Electric","70.000","1")  
+#loadProducto("batería","Con sonidos fuertes, marca Electric","70.000","1")  
 
 def updateProducto(id_pro,nom_pro,des_pro,pric_pro,tipo_id_tipo):
     try:
@@ -115,8 +114,7 @@ def updateProducto(id_pro,nom_pro,des_pro,pric_pro,tipo_id_tipo):
     return  respuesta  
 
 #getAllPro()
-#updateProducto(94,'vanesita','20447641-2',21,'bodeguera','val11e@gmail.com','vane',)
-#updateProducto(94,'vanesita','20447641-2',23,'vendedora','val11e@gmail.com','vane',)
+#updateProducto("14","batería1","Con sonidos chi fuertisimos marca Electric","70.000","1")
 
 def delProductoById(id):
     try:
@@ -138,7 +136,7 @@ def delProductoById(id):
         print("No se logró, hubo un error")
         print(e)
 
-#delProductoById(4)
+#delProductoById(34)
 #getProducto(4)
 #getAllPro()
     
