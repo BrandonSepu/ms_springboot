@@ -83,15 +83,16 @@ def login(email, password):
                     print("lo encontre, usuario logueado")
                     data = i
                     pprint(data)
+                    status = True
                     break
                 else:
                     print("NO lo encontre, clave o email incorrectos")
-                    data = False
+                    status = False
                     pprint(data)
                     break
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta)))
-        return data 
+        return status 
     except Exception as e:
         print(e)
     
