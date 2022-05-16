@@ -10,7 +10,7 @@ def getAllUsers():
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             data = respuesta.json()
-            pprint(data)
+            #pprint(data)
             print(print("se logró"+ str(respuesta)))
         else:
             print(print("NO se logró" + str(respuesta)))
@@ -49,7 +49,6 @@ def getUserByEmail(email):
             print(print("se logró"+ str(respuesta)))
             data = respuesta.json()
             for i in data:
-                print(i["email_user"])
                 if i["email_user"] == email:
                     print("lo encontre")
                     data = i
@@ -59,14 +58,13 @@ def getUserByEmail(email):
                     print("NO lo encontre")
                     data = False
                     pprint(data)
-                    break
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta))) 
         return data
     except Exception as e:
         print(e)
         
-#getUserByEmail("brandonsepux@gmail.com");
+#getUserByEmail("harry@gmail.com");
 
 def login(email, password):
     try:
@@ -89,7 +87,7 @@ def login(email, password):
                     print("NO lo encontre, clave o email incorrectos")
                     status = False
                     pprint(data)
-                    break
+                    
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta)))
         return status 
@@ -108,16 +106,17 @@ def loadUser(nom_user,rut_user,age_user,tipo_user,email_user,pass_user):
             respuesta = requests.post(url, json = dato )
             if respuesta.status_code == 200:
                 print(print("se logró"+ str(respuesta)))
+                status = True
             else:
                 print(print("NO se logró, id no encontrada"+ str(respuesta)))
+                status = False
         else:
             print("el largo del rut excede el maximo")
     except Exception as e:
         print("No se logró")
         print(e)
-        data = False
-        pprint(data)
-    return  respuesta
+        status = False
+    return  status
       
 
 #loadUser("Vanesuki","21126141-2","21","vendedora","vanesuki@gmail.com","vane")  

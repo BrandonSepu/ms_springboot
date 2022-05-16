@@ -10,4 +10,7 @@ urlpatterns = [
     path("loginning/", views.loginning, name="loginning"),
     #register
     path("register/", views.register_in, name="register"),
+    path("registering/", views.registering, name="registering"),
+    #data_info
+    path("data_user/", views.data_user, name="data_user"),
 ]
