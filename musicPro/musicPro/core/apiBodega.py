@@ -3,10 +3,10 @@ import requests
 import json
 
 
-def getAllVentas():
+def getAllBodega():
     try:
-        key="ventas"
-        url="https://springbootventas.herokuapp.com/" + key
+        key="bodega"
+        url="https://springbootbodega.herokuapp.com/" + key
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             data = respuesta.json()
@@ -18,7 +18,7 @@ def getAllVentas():
     except Exception as e:
         print(e)
 
-#getAllVentas()
+getAllBodega()
 
 def getVenta(id):
 
@@ -138,6 +138,3 @@ def delVentaById(id):
 #delVentaById(4)
 #getVenta(4)
 #getAllVentas()
-    
-
-    
