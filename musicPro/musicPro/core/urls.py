@@ -13,4 +13,5 @@ urlpatterns = [
     path("registering/", views.registering, name="registering"),
     #data_info
     path("data_user/", views.data_user, name="data_user"),
+    path("updateing/", views.updateing, name="updateing"),
 ]
