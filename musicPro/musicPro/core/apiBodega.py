@@ -73,7 +73,7 @@ def loadBodega(producto_id,stock_bod):
         url="https://springbootproductos.herokuapp.com/loadInBodega"
         respuesta = False
     
-        if len(pric_pro) <= 10:
+        if len(stock_bod) <= 10:
             dato = {"producto_id":producto_id,"stock_bod":stock_bod}
             respuesta = requests.post(url, json = dato )
             if respuesta.status_code == 200:
@@ -90,15 +90,16 @@ def loadBodega(producto_id,stock_bod):
     return  respuesta
       
 
-#loadProducto("batería","Con sonidos fuertes, marca Electric","70.000","1")  
+#loadBodega("24","30")  
+#getAllBodega()
 
-def updateProducto(id_pro,nom_pro,des_pro,pric_pro,tipo_id_tipo):
+def updateBodega(id_bod,producto_id,stock_bod):
     try:
         url="https://springbootproductos.herokuapp.com/updateBodega"
         respuesta = False
     
-        if len(pric_pro) <= 10:
-            dato = {'id_pro': id_pro,"nom_pro":nom_pro,"des_pro":des_pro,"pric_pro":pric_pro,"tipo_id_tipo":tipo_id_tipo}
+        if len(stock_bod) <= 10:
+            dato = {'id_bod': id_bod,"producto_id":producto_id,"stock_bod":stock_bod}
             respuesta = requests.put(url, json = dato )
             if respuesta.status_code == 200:
                 print(print("se logró"+ str(respuesta)))
@@ -113,32 +114,31 @@ def updateProducto(id_pro,nom_pro,des_pro,pric_pro,tipo_id_tipo):
         pprint(data)
     return  respuesta  
 
-#getAllPro()
-#updateProducto("14","batería1","Con sonidos chi fuertisimos marca Electric","70.000","1")
+#getAllBodega()
+#updateBodega("4","14","70")
 
-def delProductoById(id):
+def delBodegaById(id):
     try:
-        data = getProducto(id)
+        data = getBodega(id)
         respuesta = False
-        url="https://springbootproductos.herokuapp.com/delBoPro/" + str(id)
+        url="https://springbootproductos.herokuapp.com/delBodPro/" + str(id)
         if id >= 0:
             respuesta = requests.delete(url)
             if respuesta.status_code == 200:
-                print("se logró"+ str(respuesta) + " eliminaste a : " + data["nom_pro"])
+                print("se logró"+ str(respuesta) + " eliminaste a : " + data["id_bod"])
                 print("se logró")
             else:
                 print(print("NO se logró, id no encontrada"+ str(respuesta)))
         else:
-            print("id no encontrada = "+id)
-        
+            print("id no encontrada = "+id)        
         return respuesta
     except Exception as e:
         print("No se logró, hubo un error")
         print(e)
 
-#delProductoById(34)
-#getProducto(4)
-#getAllPro()
+#delBodegaById(14)
+#getBodega(4)
+#getAllBodega()
     
     
 
