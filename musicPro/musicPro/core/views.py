@@ -1,6 +1,8 @@
+from multiprocessing import context
 from zlib import DEF_BUF_SIZE
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from core.apiUser import getAllUsers, loadUser, login
+from core.apiUser import getAllUsers, loadUser, login, updateUser
 from django.contrib import messages
 
 # Create your views here.
@@ -99,8 +101,17 @@ def delUser(request):
     return redirect("data_user")
 
 def updateing(request):
-    newTipo = request.PUT["tipo_user"]
-    print(newTipo)
-    return newTipo
+    
+    try:
+        if request.method == "POST":
+            tipo = request.POST["tipo_user"]
+            email = request["email_user"]
+            #print(str(tipo))
+            print(str(email))
+            #updateUser()
+    except Exception as e:
+        print(e)
+
+    return HttpResponse("funcion")
     
     

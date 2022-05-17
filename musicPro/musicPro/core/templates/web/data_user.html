@@ -44,27 +44,32 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <div class="media">
+                                                    <div class="list-group">
                                                         <a href="#" class="pull-left">
                                                             <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                                                         </a>
-                                                        <div class="media-body">
-                                                            <span class="media-meta pull-right text-dark">edad: {{i.age_user}}</span>
-                                                            
+                                                        <div class="list-group">
+                                                            <span class="list-group pull-right text-dark">edad: {{i.age_user}}</span>
                                                             <h4 class="title alert-dark">
                                                                 {{i.nom_user}}
-                                                                <span class="pull-right pagado">
-                                                                    ({{i.tipo_user}})
-                                                                    <form id="login-form" class="form" action="/updateing/" method="put">
+                                                                <p>rut: : {{i.rut_user}}</p>
+                                                                <p name="email_user" id="email_user">email: : {{i.email_user}}</p>
+                                                                <span class="pull-center pagado">
+                                                                    
+                                                                    <form id="login-form" class="form" action="/updateing/" method="POST">
+                                                                        <label for="remember-me" class="text-info" name="id_user" id="id_user">id: {{i.id_user}}</label><br>
                                                                         {% csrf_token %}
-                                                                        <input type="text" name="tipo_user" id="tipo_user" class="form-control" placeholder="({{i.tipo_user}})">
-                                                                        <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">EDITAR</button>
+                                                                        ({{i.tipo_user}})
+                                                                        <select type="text" name="tipo_user" class="form-control" id="tipo_user">
+                                                                            <option>Administrador</option>
+                                                                            <option>Bodeguero</option>
+                                                                            <option>Vendedor</option>
+                                                                            <option>Cliente</option>
+                                                                        </select>
+                                                                        <button value="submit" type="submit" name="submit" class="btn btn-warning btn-filter" data-target="pendiente">EDITAR</button>
                                                                     </form>
                                                                 </span>    
                                                             </h4>
-                                                            <div class="text-dark">
-                                                                <p>{{i.email_user}} | rut: : {{i.rut_user}}</p
-                                                            </div>
                                                         </div>
                                                         <div class="pull-right">
                                                             <div class="btn-group">
