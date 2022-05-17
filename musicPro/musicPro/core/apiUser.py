@@ -152,23 +152,21 @@ def delUserById(id):
         data = getUser(id)
         respuesta = False
         url="https://springbootusers.herokuapp.com/dUser/" + str(id)
-        if id >= 0:
-            respuesta = requests.delete(url)
-            if respuesta.status_code == 200:
-                print("se logró"+ str(respuesta) + " eliminste a : " + data["nom_user"])
-                print("se logró")
-            else:
-                print(print("NO se logró, id no encontrada"+ str(respuesta)))
+        
+        respuesta = requests.delete(url)
+        if respuesta.status_code == 200:
+            print("se logró"+ str(respuesta))
         else:
-            print("id no encontrada = "+id)
+            print(print("NO se logró, id no encontrada"+ str(respuesta)))
+        print("id no encontrada = "+id)
         
         return respuesta
     except Exception as e:
         print("No se logró, hubo un error")
         print(e)
 
-#delUserById(74)
-#getUser(4)
+#delUserById(94)
+#getUser(94)
 #getAllUsers()
     
     

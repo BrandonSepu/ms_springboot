@@ -2,19 +2,17 @@ from multiprocessing import context
 from zlib import DEF_BUF_SIZE
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from core.apiUser import getAllUsers, getUserByEmail, loadUser, login, updateUser
+from core.apiProducto import getAllPro
+from core.apiUser import delUserById, getAllUsers, getUserByEmail, loadUser, login, updateUser
 from django.contrib import messages
 
 # Create your views here.
-
+#GENERALES
 def base(request):
     return render(request, 'web/base.html')
 
 def index(request):
     return render(request, 'web/index.html')
-
-def productos(request):
-    return render(request, 'web/productos.html')
 
 #LOGICA DEL LOGIN
 
@@ -62,7 +60,7 @@ def registering(request):
     except Exception as e:
         print(e)
     
-#logica data_user
+#logica data_user VISTA ADMIN
 
 def data_user(request):
     datalen = len(getAllUsers())
@@ -96,8 +94,10 @@ def data_user(request):
 
     return render(request, 'web/data_user.html', context)
 
-def delUser(request):
-    
+def deleteing(request):
+    id_user = request.POST["id_user"]
+    print(id_user)
+    delUserById(id_user)
     return redirect("data_user")
 
 def updateing(request):
@@ -123,6 +123,18 @@ def updateing(request):
     except Exception as e:
         print(e)
 
+#LOGICA PRODUCT
+
+def productos(request):
+    datalen = len(getAllPro())
+    data = getAllPro()
+
+    context = {"data" : data}
+    return render(request, 'web/productos.html', context)
+
+def data_products(request):
+    return render(request, 'web/productos.html', )
     
+
     
     

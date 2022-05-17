@@ -18,7 +18,7 @@ def getAllPro():
     except Exception as e:
         print(e)
 
-#getAllPro()
+getAllPro()
 
 def getProducto(id):
 
@@ -54,19 +54,18 @@ def getProByType(tipo):
                     print("lo encontre")
                     data = i
                     print(data)
-                    break
+                    
                 else:
                     print("NO lo encontre")
                     data = False
-                    pprint(data)
-                    break
+                    #pprint(data)
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta))) 
         return data
     except Exception as e:
         print(e)
         
-#getProByType(1); 
+getProByType(1); 
 
 def loadProducto(nom_pro,des_pro,pric_pro,tipo_id_tipo):
     try:
@@ -121,16 +120,13 @@ def delProductoById(id):
         data = getProducto(id)
         respuesta = False
         url="https://springbootproductos.herokuapp.com/delPro/" + str(id)
-        if id >= 0:
-            respuesta = requests.delete(url)
-            if respuesta.status_code == 200:
-                print("se logró"+ str(respuesta) + " eliminaste a : " + data["nom_pro"])
-                print("se logró")
-            else:
-                print(print("NO se logró, id no encontrada"+ str(respuesta)))
-        else:
-            print("id no encontrada = "+id)
         
+        respuesta = requests.delete(url)
+        if respuesta.status_code == 200:
+            print("se logró"+ str(respuesta) + " eliminaste a : " + data["nom_pro"])
+            print("se logró")
+        else:
+            print(print("NO se logró, id no encontrada"+ str(respuesta)))
         return respuesta
     except Exception as e:
         print("No se logró, hubo un error")

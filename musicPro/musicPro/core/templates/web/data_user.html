@@ -38,10 +38,10 @@
                                                                 <span class="list-group pull-right text-dark">edad: {{i.age_user}}</span>
                                                                 {{i.nom_user}}
                                                                 <p>rut: : {{i.rut_user}}</p>
-                                                                <p name="email" id="email">email: : {{i.email_user}}</p>
+                                                                email: : {{i.email_user}}
                                                                 <span class="pull-center pagado">
                                                                     <form id="login-form" class="form" action="/updateing/" method="POST">
-                                                                        <label for="remember-me" class="text-info pull-right" name="id_user" id="id_user">id: {{i.id_user}}</label><br>
+                                                                        <label for="remember-me" class="text-info pull-right" name="iduser" id="iduser">id: {{i.id_user}}</label><br>
                                                                         {% csrf_token %}
                                                                         tipo usuario: ({{i.tipo_user}})
                                                                         <select type="text" value="Cambia" name="tipo_user" class="form-control" id="tipo_user">
@@ -53,7 +53,11 @@
                                                                         </select>
                                                                         <input type="hidden" id="email_user" name="email_user" value="{{i.email_user}}">
                                                                         <button value="submit" type="submit" name="submit" class="btn btn-warning btn-filter" data-target="pendiente">EDITAR</button>
-                                                                        <button value="submit" type="submit" name="submit" class="btn btn-danger btn-filter" data-target="cancelado">ELIMINAR</button>
+                                                                    </form>
+                                                                    <form id="login-form2" class="form" action="/deleteing/" method="POST">
+                                                                        {% csrf_token %}
+                                                                        <input type="hidden" id="id_user" name="id_user" value="{{i.id_user}}">
+                                                                        <button value="submit" type="submit" name="submit2" class="btn btn-danger btn-filter" data-target="cancelado">ELIMINAR</button>
                                                                     </form>
                                                                 </span>    
                                                             </h4>
