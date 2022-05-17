@@ -2,7 +2,7 @@ from multiprocessing import context
 from zlib import DEF_BUF_SIZE
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from core.apiUser import getAllUsers, loadUser, login, updateUser
+from core.apiUser import getAllUsers, getUserByEmail, loadUser, login, updateUser
 from django.contrib import messages
 
 # Create your views here.
@@ -105,13 +105,24 @@ def updateing(request):
     try:
         if request.method == "POST":
             tipo = request.POST["tipo_user"]
-            email = request["email_user"]
-            #print(str(tipo))
-            print(str(email))
-            #updateUser()
+            email = request.POST["email_user"] 
+            #print(email)
+            data = getUserByEmail(email)
+            id_user = data["id_user"]
+            nom_user = data["nom_user"]
+            email
+            rut_user= data["rut_user"]
+            age_user= data["age_user"]
+            tipo
+            pass_user= data["pass_user"]
+            #print(id_user,nom_user, rut_user, age_user, tipo, email, pass_user)
+            updateUser(id_user,nom_user, rut_user, age_user, tipo, email, pass_user)
+            return redirect("data_user")
+        else:
+            print("error desconocido :C")
     except Exception as e:
         print(e)
 
-    return HttpResponse("funcion")
+    
     
     

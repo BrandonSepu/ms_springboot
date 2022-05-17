@@ -32,41 +32,28 @@
                                         <h1> usuarios: {{datalen}} </h1>
                                         {% for i in data %}
                                             <tr data-status="pagado">
-                                                <td>
-                                                    <div class="ckbox">
-                                                        <input type="checkbox" id="checkbox1">
-                                                        <label for="checkbox1"></label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:;" class="star">
-                                                        <i class="glyphicon glyphicon-star"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
                                                     <div class="list-group">
-                                                        <a href="#" class="pull-left">
-                                                            <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-                                                        </a>
                                                         <div class="list-group">
-                                                            <span class="list-group pull-right text-dark">edad: {{i.age_user}}</span>
                                                             <h4 class="title alert-dark">
+                                                                <span class="list-group pull-right text-dark">edad: {{i.age_user}}</span>
                                                                 {{i.nom_user}}
                                                                 <p>rut: : {{i.rut_user}}</p>
-                                                                <p name="email_user" id="email_user">email: : {{i.email_user}}</p>
+                                                                <p name="email" id="email">email: : {{i.email_user}}</p>
                                                                 <span class="pull-center pagado">
-                                                                    
                                                                     <form id="login-form" class="form" action="/updateing/" method="POST">
-                                                                        <label for="remember-me" class="text-info" name="id_user" id="id_user">id: {{i.id_user}}</label><br>
+                                                                        <label for="remember-me" class="text-info pull-right" name="id_user" id="id_user">id: {{i.id_user}}</label><br>
                                                                         {% csrf_token %}
-                                                                        ({{i.tipo_user}})
-                                                                        <select type="text" name="tipo_user" class="form-control" id="tipo_user">
+                                                                        tipo usuario: ({{i.tipo_user}})
+                                                                        <select type="text" value="Cambia" name="tipo_user" class="form-control" id="tipo_user">
+                                                                            <option value="" selected disabled hidden>Cambia aquí</option>
                                                                             <option>Administrador</option>
                                                                             <option>Bodeguero</option>
                                                                             <option>Vendedor</option>
                                                                             <option>Cliente</option>
                                                                         </select>
+                                                                        <input type="hidden" id="email_user" name="email_user" value="{{i.email_user}}">
                                                                         <button value="submit" type="submit" name="submit" class="btn btn-warning btn-filter" data-target="pendiente">EDITAR</button>
+                                                                        <button value="submit" type="submit" name="submit" class="btn btn-danger btn-filter" data-target="cancelado">ELIMINAR</button>
                                                                     </form>
                                                                 </span>    
                                                             </h4>
@@ -74,7 +61,7 @@
                                                         <div class="pull-right">
                                                             <div class="btn-group">
                                                                 <button type="button" class="btn btn-success btn-filter" data-target="pagado"><a class="text-white" href="{% url 'data_user' %}">INFORME-COMPRAS<a></button>
-                                                                <button type="button" class="btn btn-danger btn-filter" data-target="cancelado" method="del"><a class="text-white" href="{% url 'data_user' %}">ELIMINAR<a></button>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
