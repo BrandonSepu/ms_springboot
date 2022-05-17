@@ -49,7 +49,6 @@ def gettVentaByDetalle(detalle):
             print(print("se logró"+ str(respuesta)))
             data = respuesta.json()
             for i in data:
-                print(i["detalle_ven_id_detven"])
                 if i["detalle_ven_id_detven"] == detalle:
                     print("lo encontre")
                     data = i
@@ -59,14 +58,13 @@ def gettVentaByDetalle(detalle):
                     print("NO lo encontre")
                     data = False
                     pprint(data)
-                    break
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta))) 
         return data
     except Exception as e:
         print(e)
         
-gettVentaByDetalle(2);
+#gettVentaByDetalle(2);
 
 def loadVenta(product_id,user_id,detalle_ven_id_detven):
     try:
@@ -89,7 +87,7 @@ def loadVenta(product_id,user_id,detalle_ven_id_detven):
         pprint(data)
     return  respuesta
       
-#loadVenta("2",84,1)  
+#loadVenta("24",24,4)  
 
 def updateVenta(id_ventas,product_id,user_id,detalle_ven_id_detven):
     try:

@@ -3,10 +3,10 @@ import requests
 import json
 
 
-def getAllBodega():
+def getAllTipoPago():
     try:
-        key="bodega"
-        url="https://springbootproductos.herokuapp.com/" + key
+        key="tipoPagos"
+        url="https://springbootventas.herokuapp.com/" + key
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             data = respuesta.json()
@@ -18,12 +18,12 @@ def getAllBodega():
     except Exception as e:
         print(e)
 
-#getAllBodega()
+#getAllTipoPago()
 
-def getBodega(id):
-    
+def getTipoPago(id):
+
     try:
-        url="https://springbootproductos.herokuapp.com/bodega/"+ str(id)
+        url="https://springbootventas.herokuapp.com/tipoPago/"+ str(id)
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             print(print("se logró"+ str(respuesta)))
@@ -37,20 +37,19 @@ def getBodega(id):
     except Exception as e:
         print(e)
 
-#getBodega(2)
+getTipoPago(1)
 
-def getProByBodega(product):
+def gettVentaByDetalle(detalle):
     try:
-        key="bodega"
-        url="https://springbootproductos.herokuapp.com/" + key
+        key="ventas"
+        url="https://springbootventas.herokuapp.com/" + key
         data=False
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             print(print("se logró"+ str(respuesta)))
             data = respuesta.json()
             for i in data:
-                print(i["producto_id"])
-                if i["producto_id"] == product:
+                if i["detalle_ven_id_detven"] == detalle:
                     print("lo encontre")
                     data = i
                     print(data)
@@ -59,22 +58,21 @@ def getProByBodega(product):
                     print("NO lo encontre")
                     data = False
                     pprint(data)
-                    break
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta))) 
         return data
     except Exception as e:
         print(e)
         
-#getProByBodega(1); 
+#gettVentaByDetalle(2);
 
-def loadBodega(producto_id,stock_bod):
+def loadVenta(product_id,user_id,detalle_ven_id_detven):
     try:
-        url="https://springbootproductos.herokuapp.com/loadInBodega"
+        url="https://springbootventas.herokuapp.com/loadInVenta"
         respuesta = False
     
-        if len(stock_bod) <= 10:
-            dato = {"producto_id":producto_id,"stock_bod":stock_bod}
+        if len(product_id) <= 10:
+            dato = {"product_id": product_id,"user_id": user_id,"detalle_ven_id_detven": detalle_ven_id_detven}
             respuesta = requests.post(url, json = dato )
             if respuesta.status_code == 200:
                 print(print("se logró"+ str(respuesta)))
@@ -89,17 +87,15 @@ def loadBodega(producto_id,stock_bod):
         pprint(data)
     return  respuesta
       
+#loadVenta("24",24,4)  
 
-#loadBodega("24","30")  
-#getAllBodega()
-
-def updateBodega(id_bod,producto_id,stock_bod):
+def updateVenta(id_ventas,product_id,user_id,detalle_ven_id_detven):
     try:
-        url="https://springbootproductos.herokuapp.com/updateBodega"
+        url="https://springbootventas.herokuapp.com/updateVenta"
         respuesta = False
     
-        if len(stock_bod) <= 10:
-            dato = {'id_bod': id_bod,"producto_id":producto_id,"stock_bod":stock_bod}
+        if len(id_ventas) <= 10:
+            dato = {'id_ventas': id_ventas,"product_id":product_id,"user_id":user_id,"detalle_ven_id_detven":detalle_ven_id_detven}
             respuesta = requests.put(url, json = dato )
             if respuesta.status_code == 200:
                 print(print("se logró"+ str(respuesta)))
@@ -114,32 +110,32 @@ def updateBodega(id_bod,producto_id,stock_bod):
         pprint(data)
     return  respuesta  
 
-#getAllBodega()
-#updateBodega("4","14","70")
+#getAllVentas()
+#updateVenta("1","2","84","1")
 
-def delBodegaById(id):
+def delVentaById(id):
     try:
-        data = getBodega(id)
+        data = getVenta(id)
         respuesta = False
-        url="https://springbootproductos.herokuapp.com/delBodPro/" + str(id)
+        url="https://springbootventas.herokuapp.com/delVenta/" + str(id)
         if id >= 0:
             respuesta = requests.delete(url)
             if respuesta.status_code == 200:
-                print("se logró"+ str(respuesta) + " eliminaste a : " + data["id_bod"])
+                print("se logró"+ str(respuesta) + " eliminaste a la venta: " + data["id_ventas"])
                 print("se logró")
             else:
-                print(print("No se logró, id no encontrada"+ str(respuesta)))
+                print(print("NO se logró, id no encontrada"+ str(respuesta)))
         else:
-            print("id no encontrada = "+id)        
+            print("id no encontrada = "+id)
+        
         return respuesta
     except Exception as e:
         print("No se logró, hubo un error")
         print(e)
 
-#delBodegaById(14)
-#getBodega(4)
-#getAllBodega()
-    
+#delVentaById(4)
+#getVenta(4)
+#getAllVentas()
     
 
-
+    

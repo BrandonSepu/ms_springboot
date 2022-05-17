@@ -3,9 +3,9 @@ import requests
 import json
 
 
-def getAllBodega():
+def getAllTipoPro():
     try:
-        key="bodega"
+        key="tipo"
         url="https://springbootproductos.herokuapp.com/" + key
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
@@ -18,12 +18,12 @@ def getAllBodega():
     except Exception as e:
         print(e)
 
-#getAllBodega()
+#getAllTipoPro()
 
-def getBodega(id):
-    
+def getTipoPro(id):
+
     try:
-        url="https://springbootproductos.herokuapp.com/bodega/"+ str(id)
+        url="https://springbootproductos.herokuapp.com/tipo/"+ str(id)
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             print(print("se logró"+ str(respuesta)))
@@ -37,11 +37,11 @@ def getBodega(id):
     except Exception as e:
         print(e)
 
-#getBodega(2)
+#getTipoPro(4)
 
-def getProByBodega(product):
+def getTipoProByType(tipo):
     try:
-        key="bodega"
+        key="tipo"
         url="https://springbootproductos.herokuapp.com/" + key
         data=False
         respuesta = requests.get(url)
@@ -49,8 +49,7 @@ def getProByBodega(product):
             print(print("se logró"+ str(respuesta)))
             data = respuesta.json()
             for i in data:
-                print(i["producto_id"])
-                if i["producto_id"] == product:
+                if i["nom_tipo"] == tipo:
                     print("lo encontre")
                     data = i
                     print(data)
@@ -59,22 +58,21 @@ def getProByBodega(product):
                     print("NO lo encontre")
                     data = False
                     pprint(data)
-                    break
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta))) 
         return data
     except Exception as e:
         print(e)
         
-#getProByBodega(1); 
+#getTipoProByType(4); 
 
-def loadBodega(producto_id,stock_bod):
+def loadProducto(nom_tipo):
     try:
-        url="https://springbootproductos.herokuapp.com/loadInBodega"
+        url="https://springbootproductos.herokuapp.com/loadTipo"
         respuesta = False
     
-        if len(stock_bod) <= 10:
-            dato = {"producto_id":producto_id,"stock_bod":stock_bod}
+        if len(nom_tipo) <= 100:
+            dato = {"nom_tipo":nom_tipo}
             respuesta = requests.post(url, json = dato )
             if respuesta.status_code == 200:
                 print(print("se logró"+ str(respuesta)))
@@ -90,16 +88,15 @@ def loadBodega(producto_id,stock_bod):
     return  respuesta
       
 
-#loadBodega("24","30")  
-#getAllBodega()
+#loadProducto("otros2")  
 
-def updateBodega(id_bod,producto_id,stock_bod):
+def updateTipoPro(id_tipo,nom_tipo):
     try:
-        url="https://springbootproductos.herokuapp.com/updateBodega"
+        url="https://springbootproductos.herokuapp.com/updateTipo"
         respuesta = False
     
-        if len(stock_bod) <= 10:
-            dato = {'id_bod': id_bod,"producto_id":producto_id,"stock_bod":stock_bod}
+        if len(nom_tipo) <= 100:
+            dato = {'id_tipo': id_tipo,"nom_tipo":nom_tipo}
             respuesta = requests.put(url, json = dato )
             if respuesta.status_code == 200:
                 print(print("se logró"+ str(respuesta)))
@@ -114,32 +111,31 @@ def updateBodega(id_bod,producto_id,stock_bod):
         pprint(data)
     return  respuesta  
 
-#getAllBodega()
-#updateBodega("4","14","70")
+#getAllTipoPro()
+#updateTipoPro("24","otros3")
 
-def delBodegaById(id):
+def delTipoProById(id):
     try:
-        data = getBodega(id)
+        data = getTipoPro(id)
         respuesta = False
-        url="https://springbootproductos.herokuapp.com/delBodPro/" + str(id)
+        url="https://springbootproductos.herokuapp.com/delTipo/" + str(id)
         if id >= 0:
             respuesta = requests.delete(url)
             if respuesta.status_code == 200:
-                print("se logró"+ str(respuesta) + " eliminaste a : " + data["id_bod"])
+                print("se logró"+ str(respuesta) + " eliminaste a : " + data["nom_tipo"])
                 print("se logró")
             else:
-                print(print("No se logró, id no encontrada"+ str(respuesta)))
+                print(print("NO se logró, id no encontrada"+ str(respuesta)))
         else:
-            print("id no encontrada = "+id)        
+            print("id no encontrada = "+id)
+        
         return respuesta
     except Exception as e:
         print("No se logró, hubo un error")
         print(e)
 
-#delBodegaById(14)
-#getBodega(4)
-#getAllBodega()
+#delTipoProById(24)
+#getTipoPro(4)
+#getAllTipoPro()
     
     
-
-
