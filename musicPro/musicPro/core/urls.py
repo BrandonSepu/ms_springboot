@@ -18,4 +18,6 @@ urlpatterns = [
     #data_info_products
     path("productos/", views.productos, name="productos"),
     path("data_products/", views.data_products, name="data_products"),
+    #carrito
+    path("tienda", views.tienda, name="tienda")
 ]

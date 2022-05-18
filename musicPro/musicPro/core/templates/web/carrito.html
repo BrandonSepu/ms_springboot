@@ -1,0 +1,50 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block contenido %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% endblock css %}
+
+    <div class="alert alert-primary" role="alert">
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="row" colspan="3" class="text-center">CARRITO</th>
+        </tr>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%if request.session.carrito.items%}
+        {%for key, value in  request.session.carrito.items%}
+            <tr>
+                <td>{{value.Nombre}}</td>
+                <td>{{value.precio}}</td>
+                <td>{{value.acumulado}}
+                    <a href="{% url 'Tienda' value.id_pro%}" class="badge btn btn-dark badge-dark">+</a>
+                    <a href="{% url 'Tienda' value.id_pro%}" class="badge btn btn-dark badge-dark">-</a>
+                </td>
+            </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">
+                <div class="alert alert-danger text center">Sin productos</div>
+            </td>
+        </tr>
+         {% endif %}
+            <tr>
+                <th scope="row">total</th>
+                    <div class="alert alert-danger text center">Sin productos</div>
+                </td colspan="2">$ {{total.carrito}}</td>
+            </tr>
+        </body>
+    </table>
+
+{% endblock contenido %} 

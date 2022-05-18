@@ -134,6 +134,15 @@ def productos(request):
 
 def data_products(request):
     return render(request, 'web/productos.html', )
+
+def tienda(request):
+    datalen = len(getAllPro())
+    data = getAllPro()
+
+    context = {"data" : data}
+    return render(request, 'web/tienda.html', context)
+
+
     
 
     
