@@ -18,7 +18,7 @@ def getAllBodega():
     except Exception as e:
         print(e)
 
-#getAllBodega()
+getAllBodega()
 
 def getBodega(id):
     
