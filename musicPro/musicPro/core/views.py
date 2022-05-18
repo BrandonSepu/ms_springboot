@@ -130,6 +130,7 @@ def productos(request):
     return render(request, 'web/productos.html', context)
 
 def data_products(request):
+<<<<<<< HEAD
     dataBodega = getAllBodega()
     datalen = len(getAllPro())
     data = getAllPro()
@@ -238,6 +239,15 @@ def stock(request):
     context = {"dataPro" : dataPro,
                 "dataStock" : dataStock}
     return render(request, 'product/stock.html', context)
+
+#TIENDA
+def tienda(request):
+    datalen = len(getAllPro())
+    data = getAllPro()
+
+    context = {"data" : data}
+    return render(request, 'web/tienda.html', context)
+
     
 
     

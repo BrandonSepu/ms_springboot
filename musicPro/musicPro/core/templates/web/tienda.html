@@ -1,0 +1,45 @@
+
+{% extends 'web/base.html' %}
+{% load static %}
+{% block contenido %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% endblock css %}
+
+<div class = "container">
+    <div class = "row">
+        <h1>Tienda</h1>
+    </div>    
+        <div class = "row">
+            <div class = "col-8">
+                <div class=  "row" style="padding: 10px 0;">
+                    <div class="col-12">
+                        <div class = "row">
+                            {% for i in data %}
+                            <div class="col-6">
+                                <div class = "card" style ="height: 10 rem, width: 23 rem; margin: 5px 0px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{i.nom_pro}}</h5>
+                                        <p class="card-text">{{i.des_pro}}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">{{i.pric_pro}} CLP</small> | <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter" data-target="cancelado">Lo quiero</button>
+                                    </div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-4">
+                Carrito
+            </div>
+        </div>
+</div>   
+
+    
+{% endblock contenido %} 
