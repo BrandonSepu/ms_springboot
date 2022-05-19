@@ -43,10 +43,19 @@ p{
 
 }
 
+.navbar-brand{
+    color: #fff;
+}
+
+.navbar-toggler{
+    align-items: rigth;
+}
+
 .nav-link{
   text-align: center;
   line-height: 1.5;
   list-style: none;
+  color: #fff;
 }
 
 .navbar-expand-lg

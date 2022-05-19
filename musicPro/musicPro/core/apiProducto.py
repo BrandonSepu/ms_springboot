@@ -18,7 +18,7 @@ def getAllPro():
     except Exception as e:
         print(e)
 
-getAllPro()
+#getAllPro()
 
 def getProducto(id):
 

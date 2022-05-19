@@ -1,10 +1,13 @@
+from itertools import product
 from multiprocessing import context
 from zlib import DEF_BUF_SIZE
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from core.apiProducto import getAllPro
+from core.Carrito import Carrito
+from core.apiProducto import getAllPro, getProducto
 from core.apiUser import delUserById, getAllUsers, getUserByEmail, loadUser, login, updateUser
 from django.contrib import messages
+from django.shortcuts import render, HttpResponse, redirect
 
 # Create your views here.
 #GENERALES
@@ -135,13 +138,68 @@ def productos(request):
 def data_products(request):
     return render(request, 'web/productos.html', )
 
+#CARRITO
+
 def tienda(request):
     datalen = len(getAllPro())
     data = getAllPro()
-
+    
     context = {"data" : data}
     return render(request, 'web/tienda.html', context)
 
+def carrito(request):
+    return render(request, 'web/carrito.html')
+
+def agregarProducto(request, id_pro):
+    carrito = Carrito(request)
+    producto = getProducto(id=id_pro)
+    carrito.agregar(producto)
+    return redirect("tienda")
+
+def eliminar_producto(request, id_pro):
+    carrito = Carrito(request)
+    producto = getProducto(id=id_pro)
+    carrito.eliminar(producto)
+    return redirect("Tienda")
+
+def restar_producto(request, id_pro):
+    carrito = Carrito(request)
+    producto = getProducto(id=id_pro)
+    carrito.restar(producto)
+    return redirect("Tienda")
+
+def limpiar_carrito(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect("Tienda")
+
+"""def tienda(request):
+    #return HttpResponse("Hola Pythonizando")
+    productos = Producto.objects.all()
+    return render(request, "tienda.html", {'productos':productos})
+
+def agregar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.agregar(producto)
+    return redirect("Tienda")
+
+def eliminar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.eliminar(producto)
+    return redirect("Tienda")
+
+def restar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.restar(producto)
+    return redirect("Tienda")
+
+def limpiar_carrito(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect("Tienda")"""
 
     
 
