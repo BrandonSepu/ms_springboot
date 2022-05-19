@@ -65,18 +65,19 @@ def getProByType(tipo):
     except Exception as e:
         print(e)
         
-getProByType(1); 
+#getProByType(1); 
 
 def loadProducto(nom_pro,des_pro,pric_pro,tipo_id_tipo):
     try:
         url="https://springbootproductos.herokuapp.com/loadProducto"
         respuesta = False
-    
+        status = False
         if len(pric_pro) <= 10:
             dato = {"nom_pro":nom_pro,"des_pro":des_pro,"pric_pro":pric_pro,"tipo_id_tipo":tipo_id_tipo}
             respuesta = requests.post(url, json = dato )
             if respuesta.status_code == 200:
                 print(print("se logró"+ str(respuesta)))
+                status = True
             else:
                 print(print("NO se logró, id no encontrada"+ str(respuesta)))
         else:
@@ -86,7 +87,7 @@ def loadProducto(nom_pro,des_pro,pric_pro,tipo_id_tipo):
         print(e)
         data = False
         pprint(data)
-    return  respuesta
+    return  status
       
 
 #loadProducto("batería","Con sonidos fuertes, marca Electric","70.000","1")  

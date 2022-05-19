@@ -1,0 +1,70 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block contenido %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% endblock css %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="text-center alert-success bg-success {{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div id="login">
+        <h2 class="text-center text-info pt-5">MUSIC PRO</h2>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        
+                        <form id="login-form" class="form" action="/registering_pro/" method="post">
+                            {% csrf_token %}
+                            <h3 class="text-center text-info">Product Register</h3>
+							<div class="form-group">
+                                <label for="Nombre" class="text-info">Nombre Producto:</label><br>
+                                <input type="text" name="nom_pro" id="nom_pro" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="text" class="text-info">Descripcion:</label><br>
+                                <input type="text" name="des_pro" id="des_pro" class="form-control">
+                            </div>
+							<div class="form-group">
+                                <label for="Rut" class="text-info">tipo:</label><br>
+                                <select type="text" value="tipo Producto" name="tipo_id_tipo" class="form-control" id="tipo_id_tipo">
+                                    <option value="" selected disabled hidden>Tipo Producto</option>
+                                    <option>guitarra cuerpo solido</option>
+                                    <option>guitarra acustica</option>
+                                    <option>guitarra electrica</option>
+                                    <option>bajo 4 cuerda</option>
+                                    <option>bajo 5 cuerdas</option>
+                                    <option>bajos activos</option>
+                                    <option>bajos pasivos</option>
+                                    <option>piano de media cola</option>
+                                    <option>piano de cola entera</option>
+                                    <option>pianolas</option>
+                                    <option>bateria acustica</option>
+                                    <option>bateria electrica</option>
+                                    <option>amplificadores cabezales</option>
+                                    <option>amplificadores cajas</option>
+                                    <option>otros</option>
+                                </select>
+                            </div>
+							<div class="form-group">
+                                <label for="Edad" class="text-info">Precio:</label><br>
+                                <input type="number" name="pric_pro" id="pric_pro" min="1" class="form-control">
+                            </div>
+                            <div id="register-link" class="text-center">
+                                <input type="submit" name="submit" class="text-center btn btn-info btn-md " value="Registrar">
+                            </div>
+							<hr>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %} 

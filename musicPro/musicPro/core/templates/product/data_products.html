@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% extends 'web/base.html' %}
+{% load static %}
+{% block contenido %}
+  
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    {% endblock css %}
+    <!-- CARROUSEL-->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="text-center alert-success bg-success {{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="container" >
+        <div class="row">
+
+            <section class="content">
+                <h1>Productos Registrados</h1>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-container">
+                                <table class="table table-filter">
+                                    <tbody>
+                                        <h1> Productos: {{datalen}} </h1> 
+                                        <div  class="row m-sm-auto"  >
+                                            <a href="{% url 'reg_product' %}" class="btn btn-primary">Agregar Producto +</a>
+                                        </div>
+                                        {% for i in data %}
+                                        <div>
+                                            <div class="list-group">
+                                                <div class="list-group">
+                                                    <div class="title bg-light">
+                                                        {%for s in dataBodega%}
+                                                            {%if s.producto_id == i.id_pro%}
+                                                                <div>
+                                                                    Stock: {{s.stock_bod}} 
+                                                                </div>
+                                                            {%endif%}
+                                                        {%endfor%}
+                                                        {{i.nom_pro}}
+                                                        <p>tipo: : {{i.tipo_id_tipo}}</p>
+                                                        <div>
+                                                            descripcion: : {{i.des_pro}}
+                                                        </div>
+                                                        <div>
+                                                            <label for="remember-me" class="text-info pull-right" name="iduser" id="iduser">id: {{i.id_pro}}</label><br>
+                                                        </div>
+                                                        <span class="pull-center pagado">
+                                                            
+                                                            <div  class=" row m-sm-auto">
+                                                                <div  class="m-sm-auto">
+                                                                    <form id="login-form2" class="form" action="/updateing_pro/" method="POST">
+                                                                        {% csrf_token %}
+                                                                        <div>
+                                                                            Precio: $({{i.pric_pro}})
+                                                                        </div>
+                                                                        <input type="number" id="pric_pro" name="pric_pro" placeholder="$000.000">
+                                                                        <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">
+                                                                        <button value="submit" type="submit" name="submit2" class="btn btn-warning btn-filter" data-target="cancelado">EDITAR</button>
+                                                                    </form>
+                                                                </div>
+                                                                <div  class="row m-sm-auto">
+                                                                    <form id="login-form2" class="form" action="/deleteing_pro/" method="POST">
+                                                                        {% csrf_token %}
+                                                                        <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">
+                                                                        <button value="submit" type="submit" name="submit2" class="btn btn-danger btn-filter" data-target="cancelado">ELIMINAR</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </span>   
+                                                    </div>
+                                                </div>
+                                                
+                                                <hr>
+                                            </div>
+                                        </div>
+
+                                        {%endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-footer">
+                        <p>
+                            MusicPro © - 2022 <br>
+                            Powered By equipo7</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </div>
+
+{% endblock contenido %} 
