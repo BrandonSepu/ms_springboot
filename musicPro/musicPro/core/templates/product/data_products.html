@@ -38,17 +38,18 @@
                                             <div class="list-group">
                                                 <div class="list-group">
                                                     <div class="title bg-light">
-                                                        {%for s in dataBodega%}
-                                                            {%if s.producto_id == i.id_pro%}
-                                                                <div>
-                                                                    Stock: {{s.stock_bod}} 
-                                                                </div>
-                                                            {%endif%}
-                                                        {%endfor%}
-                                                        {{i.nom_pro}}
-                                                        <p>tipo: : {{i.tipo_id_tipo}}</p>
+                                                        <div class="img">
+                                                            <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
+                                                        </div>   
+                                                        <div>
+                                                            <H2>{{i.nom_pro}}</h2>
+                                                            tipo: : {{i.tipo.nom_tipo}}
+                                                        </div>  
                                                         <div>
                                                             descripcion: : {{i.des_pro}}
+                                                        </div>
+                                                        <div class="">
+                                                            <h6 class="card-title">Stock: {{i.stock_pro}}</h6>
                                                         </div>
                                                         <div>
                                                             <label for="remember-me" class="text-info pull-right" name="iduser" id="iduser">id: {{i.id_pro}}</label><br>

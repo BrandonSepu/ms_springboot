@@ -17,13 +17,18 @@ urlpatterns = [
     #data_info_products
     path("productos/", views.productos, name="productos"),
     path("data_products/", views.data_products, name="data_products"),
-
+    path("bodega/", views.bodega, name="bodega"),
     path("reg_product/", views.reg_product, name="reg_product"),
     path("registering_pro/", views.registering_pro, name="registering_pro"),
     path("deleteing_pro/", views.deleteing_pro, name="deleteing_pro"),
     path("updateing_pro/", views.updateing_pro, name="updateing_pro"),
-    #stock
-    path("stock/", views.stock, name="stock"),
     #carrito
-    path("tienda", views.tienda, name="tienda")
+    path("tienda", views.tienda, name="tienda"),
+    #ventas
+    path("venta/", views.venta, name="venta"),
+    #redirect
+    path("re_admin/", views.re_admin, name="re_admin"),
+    #ADMIN
+    path("informes/", views.informes, name="informes"),
+
 ]

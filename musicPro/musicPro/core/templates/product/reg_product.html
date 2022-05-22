@@ -21,41 +21,38 @@
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                         
-                        <form id="login-form" class="form" action="/registering_pro/" method="post">
+                        <form id="login-form" enctype="multipart/form-data" class="form" action="/registering_pro/" method="POST">
                             {% csrf_token %}
                             <h3 class="text-center text-info">Product Register</h3>
 							<div class="form-group">
                                 <label for="Nombre" class="text-info">Nombre Producto:</label><br>
-                                <input type="text" name="nom_pro" id="nom_pro" class="form-control">
+                                <input type="text" name="nom_pro" id="nom_pro" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label type="text" class="text-info">Imagen:</label><br>
+                                <input type="file" name="img_pro" id="img_pro" value ="hola" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="text" class="text-info">Descripcion:</label><br>
-                                <input type="text" name="des_pro" id="des_pro" class="form-control">
+                                <input type="text" name="des_pro" id="des_pro" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="text" class="text-info">Stock:</label><br>
+                                <input type="number" name="stock_pro" id="stock_pro" class="form-control" required>
                             </div>
 							<div class="form-group">
-                                <label for="Rut" class="text-info">tipo:</label><br>
-                                <select type="text" value="tipo Producto" name="tipo_id_tipo" class="form-control" id="tipo_id_tipo">
-                                    <option value="" selected disabled hidden>Tipo Producto</option>
-                                    <option>guitarra cuerpo solido</option>
-                                    <option>guitarra acustica</option>
-                                    <option>guitarra electrica</option>
-                                    <option>bajo 4 cuerda</option>
-                                    <option>bajo 5 cuerdas</option>
-                                    <option>bajos activos</option>
-                                    <option>bajos pasivos</option>
-                                    <option>piano de media cola</option>
-                                    <option>piano de cola entera</option>
-                                    <option>pianolas</option>
-                                    <option>bateria acustica</option>
-                                    <option>bateria electrica</option>
-                                    <option>amplificadores cabezales</option>
-                                    <option>amplificadores cajas</option>
-                                    <option>otros</option>
+                                <label for="text" class="text-info">tipo:</label><br>
+                                <select type="text" name="tipo_id_tipo" class="form-control" id="tipo_id_tipo" required>
+                                    <option hidden>Tipo Producto</option>
+                                    {%for i in data%}
+                                        <option>{{i.nom_tipo}}</option>
+                                    
+                                    {%endfor%}
                                 </select>
                             </div>
 							<div class="form-group">
                                 <label for="Edad" class="text-info">Precio:</label><br>
-                                <input type="number" name="pric_pro" id="pric_pro" min="1" class="form-control">
+                                <input type="number" name="pric_pro" id="pric_pro" min="1" class="form-control" required>
                             </div>
                             <div id="register-link" class="text-center">
                                 <input type="submit" name="submit" class="text-center btn btn-info btn-md " value="Registrar">

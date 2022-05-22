@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.bodegaModel;
 import com.example.demo.models.productsModel;
 import com.example.demo.services.servicePro.proService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +43,11 @@ public class productController {
     @DeleteMapping(value = "/delPro/{id}")
     public void delPro(@PathVariable("id") int idPro) {
         pService.delProduct(idPro);
+    }
+
+    @GetMapping(value = "/productos_tipo", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<productsModel> getTipByProducto() {
+        return pService.getTipeByProduct();
     }
 
 }

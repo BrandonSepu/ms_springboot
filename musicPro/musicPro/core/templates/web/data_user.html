@@ -17,76 +17,71 @@
             {% endfor %}
         </ul>
     {% endif %}
-
     <div class="container">
-        <div class="row">
-
-            <section class="content">
-                <h1>Usuarios Registrados</h1>
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="table-container">
-                                <table class="table table-filter">
-                                    <tbody>
-                                        <h1> usuarios: {{datalen}} </h1>
-                                        {% for i in data %}
-                                            <tr data-status="pagado">
-                                                    <div class="list-group">
-                                                        <div class="list-group">
-                                                            <h4 class="title alert-dark">
-                                                                <span class="list-group pull-right text-dark">edad: {{i.age_user}}</span>
-                                                                {{i.nom_user}}
-                                                                <p>rut: : {{i.rut_user}}</p>
-                                                                email: : {{i.email_user}}
-                                                                <span class="pull-center pagado">
-                                                                    <form id="login-form" class="form" action="/updateing/" method="POST">
-                                                                        <label for="remember-me" class="text-info pull-right" name="iduser" id="iduser">id: {{i.id_user}}</label><br>
-                                                                        {% csrf_token %}
-                                                                        tipo usuario: ({{i.tipo_user}})
-                                                                        <select type="text" value="Cambia" name="tipo_user" class="form-control" id="tipo_user">
-                                                                            <option value="" selected disabled hidden>Cambia aquí</option>
-                                                                            <option>Administrador</option>
-                                                                            <option>Bodeguero</option>
-                                                                            <option>Vendedor</option>
-                                                                            <option>Cliente</option>
-                                                                        </select>
-                                                                        <input type="hidden" id="email_user" name="email_user" value="{{i.email_user}}">
-                                                                        <button value="submit" type="submit" name="submit" class="btn btn-warning btn-filter" data-target="pendiente">EDITAR</button>
-                                                                    </form>
-                                                                    <form id="login-form2" class="form" action="/deleteing/" method="POST">
-                                                                        {% csrf_token %}
-                                                                        <input type="hidden" id="id_user" name="id_user" value="{{i.id_user}}">
-                                                                        <button value="submit" type="submit" name="submit2" class="btn btn-danger btn-filter" data-target="cancelado">ELIMINAR</button>
-                                                                    </form>
-                                                                </span>    
-                                                            </h4>
-                                                        </div>
-                                                        <div class="pull-right">
-                                                            <div class="btn-group">
-                                                                <button type="button" class="btn btn-success btn-filter" data-target="pagado"><a class="text-white" href="{% url 'data_user' %}">INFORME-COMPRAS<a></button>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        {%endfor%}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-footer">
-                        <p>
-                            MusicPro © - 2022 <br>
-                            Powered By equipo7</a>
-                        </p>
-                    </div>
+    	<div class="title">
+    		<div class="card">
+                <h1> usuarios: {{datalen}} </h1>
+            </div>
+    	</div>
+    	<div class="row">
+            <div class=" ml-auto mr-auto">
+                <h4><small>Simple With Actions</small></h4>
+                {% for i in data %}
+                <div class="table-responsive">
+                    <table class="table" border="1" bgcolor="red">
+                        <thead border="1">
+                            <tr style="background-color: rgb(102, 255, 153);">
+                                <th class="text-center">#</th>
+                                <th>nombre | edad</th>
+                                <th>rut</th>
+                                <th>email</th>
+                                <th class="text-center">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody border="1">
+                            <tr style="background-color: rgb(114, 191, 255);" border="1">
+                                <td class="text-center" border="1">{{i.id_user}}</td>
+                                <td border="1">{{i.nom_user}} | {{i.age_user}}</td>
+                                <td>{{i.rut_user}}</td>
+                                <td>{{i.email_user}}</td>
+                                <td class="text">
+                                    <form id="login-form" class="form" action="/updateing/" method="POST">
+                                        <label for="remember-me" class="text-info pull-right" name="iduser" id="iduser">id: {{i.id_user}}</label><br>
+                                        {% csrf_token %}
+                                        tipo usuario: ({{i.tipo_user}})
+                                        <select type="text" value="Cambia" name="tipo_user" class="form-control" id="tipo_user">
+                                            <option value="" selected disabled hidden>Cambia aquí</option>
+                                            <option>Administrador</option>
+                                            <option>Bodeguero</option>
+                                            <option>Vendedor</option>
+                                            <option>Contador</option>
+                                            <option>Cliente</option>
+                                        </select>
+                                        <input type="hidden" id="email_user" name="email_user" value="{{i.email_user}}">
+                                        <button value="submit" type="submit" name="submit" class="btn btn-warning btn-filter" data-target="pendiente">EDITAR</button>
+                                    </form>
+                                    <form id="login-form2" class="form" action="/deleteing/" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" id="id_user" name="id_user" value="{{i.id_user}}">
+                                        <button value="submit" type="submit" name="submit2" class="btn btn-danger btn-filter" data-target="cancelado">ELIMINAR</button>
+                                    </form>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                        </tbody>
+                    </table>
                 </div>
-            </section>
-            
+                {%endfor%}
+            </div>
         </div>
+    </div>  
+    <div class="content-footer">
+        <p>
+            MusicPro © - 2022 <br>
+            Powered By equipo7</a>
+        </p>
     </div>
+    
 
 {% endblock contenido %} 

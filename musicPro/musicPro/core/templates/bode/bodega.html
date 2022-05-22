@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% extends 'web/base.html' %}
+{% load static %}
+{% block contenido %}
+  
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    {% endblock css %}
+    <!-- CARROUSEL-->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="text-center alert-success bg-success {{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="container" >
+        
+        <h1>Productos Solicitados</h1>
+        <hr>
+        <tbody>
+            <h1> Productos: {{datalen}} </h1> 
+            <div class="card-group container">
+                {% for i in data %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="box card">
+                        <div class="box cardImg">
+                            <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="info">
+                            <h3>{{i.nom_pro}}</h3>
+                            <p><span>{{i.tipo.nom_tipo}}</span> Stock: {{i.stock_pro}}</p>
+                            <p><span>{{i.des_pro}}</span>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+            <div class="container">
+                <div class="col">
+                    <div class="card text-center" >
+                        <h3 >Vendedores Disponibles En Sucursal</h3>
+                    </div>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <option hidden selected>Selecciona Vendedor</option>
+                        {%for v in vendedores%}
+                            <option>{{v.nom_user}}</option>
+                        {%endfor%}
+                    </select>
+                    <br><br><br>
+                </div>
+                <div class="row" >
+                    <div class="col text-center" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success">APROBAR PEDIDO</button>
+                    </div>
+                    <div class="col text-center" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-danger">RECHAZAR PEDIDO</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </tbody>
+                    
+        <div class="content-footer">
+            <p>
+                MusicPro © - 2022 <br>
+                Powered By equipo7</a>
+            </p>
+        </div>
+        
+    </div>
+
+{% endblock contenido %} 

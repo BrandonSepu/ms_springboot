@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Blob;
 
 @Entity
 @Table(name="productos")
@@ -19,17 +20,33 @@ public class productsModel implements Serializable{
     private String des_pro;
     @Column(name = "pric_pro")
     private String pric_pro;
-    @Column(name = "tipo_id_tipo")
-    private String tipo_id_tipo;
+    @Column(name = "stock_pro")
+    private int stock_pro;
+    @Lob
+    @Column(name = "img_pro")
+    private byte[] img_pro;
+    @ManyToOne
+    @JoinColumn(name = "tipo.id_tipo")
+    private tipoModel tipo;
 
     public productsModel() {
     }
 
-    public productsModel(String nom_pro, String des_pro, String pric_pro, String tipo_id_tipo) {
+    public productsModel(String nom_pro, String des_pro, String pric_pro, int stock_pro, tipoModel tipo) {
         this.nom_pro = nom_pro;
         this.des_pro = des_pro;
         this.pric_pro = pric_pro;
-        this.tipo_id_tipo = tipo_id_tipo;
+        this.stock_pro = stock_pro;
+        this.tipo = tipo;
+    }
+
+    public productsModel(String nom_pro, String des_pro, String pric_pro, int stock_pro, byte[] img_pro, tipoModel tipo) {
+        this.nom_pro = nom_pro;
+        this.des_pro = des_pro;
+        this.pric_pro = pric_pro;
+        this.stock_pro = stock_pro;
+        this.img_pro = img_pro;
+        this.tipo = tipo;
     }
 
     public int getId_pro() {
@@ -64,11 +81,27 @@ public class productsModel implements Serializable{
         this.pric_pro = pric_pro;
     }
 
-    public String getTipo_id_tipo() {
-        return tipo_id_tipo;
+    public tipoModel getTipo() {
+        return tipo;
     }
 
-    public void setTipo_id_tipo(String tipo_id_tipo) {
-        this.tipo_id_tipo = tipo_id_tipo;
+    public void setTipo(tipoModel tipo) {
+        this.tipo = tipo;
+    }
+
+    public byte[] getImg_pro() {
+        return img_pro;
+    }
+
+    public void setImg_pro(byte[] img_pro) {
+        this.img_pro = img_pro;
+    }
+
+    public int getStock_pro() {
+        return stock_pro;
+    }
+
+    public void setStock_pro(int stock_pro) {
+        this.stock_pro = stock_pro;
     }
 }

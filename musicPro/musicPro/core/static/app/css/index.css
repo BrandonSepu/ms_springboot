@@ -8,6 +8,8 @@ body {
 
 
 }
+
+
 h1 {
   color: rgb(0, 0, 0);
   font-family: 'Dancing Script',  'cursive';
@@ -80,6 +82,16 @@ p{
 .imgcontact{
   height: 250px;
   width: 250px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.cat {
+height:300px;
+width: 300px;
 }
 
 /*footer*/

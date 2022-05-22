@@ -1,6 +1,7 @@
 package com.example.demo.services.servicePro;
 
 import com.example.demo.dao.proDao.productDaoImp;
+import com.example.demo.dao.proDao.productDaoJpa;
 import com.example.demo.models.productsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class proServiceImp implements proService{
 
     @Autowired
     productDaoImp daoProImp;
+
+    @Autowired
+    productDaoJpa daoProJpa;
 
     @Override
     public boolean createProduct(productsModel product) {
@@ -62,5 +66,10 @@ public class proServiceImp implements proService{
         };
         msg = "producto no encontrado";
         System.out.println(msg);
+    }
+
+    @Override
+    public List<productsModel> getTipeByProduct() {
+        return daoProJpa.getTipoByProduct();
     }
 }

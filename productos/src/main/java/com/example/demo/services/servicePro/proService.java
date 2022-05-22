@@ -15,4 +15,6 @@ public interface proService {
     productsModel getProduct(int idPro);
 
     void updateProduct(productsModel product);
+
+    List<productsModel> getTipeByProduct();
 }

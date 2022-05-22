@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% extends 'web/base.html' %}
+{% load static %}
+{% block contenido %}
+  
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    {% endblock css %}
+    <!-- CARROUSEL-->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="text-center alert-success bg-success {{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="container" >
+        
+        <h1>Productos Solicitados</h1>
+        
+        <tbody>
+            <h1> Productos: {{datalen}} </h1> 
+            
+            {% for i in data %}
+            <div class="container">
+                <div class="row" >
+                    <div class="col">
+                        <div class="card" style:"width:50%;">
+                            <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h1 class="card-title">{{i.nom_pro}}</h1>
+                                <p class="card-text">{{i.des_pro}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" >
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Stock: {{i.stock_pro}}</li>
+                                <li class="list-group-item">ID: {{i.id_pro}}</li>
+                                <li class="list-group-item">Tipo: {{i.tipo.nom_tipo}}</li>
+                            </ul>
+                        </div>
+                        <div class="card" >
+                            <div class="btn" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary">Accion1</button>
+                            </div>
+                        </div>
+                        <div class="card" >
+                            <div class="btn" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary">Accion1</button>
+                            </div>
+                        </div>
+                        <div class="card" >
+                            <div class="btn" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary">Accion1</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" >
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Stock: {{i.stock_pro}}</li>
+                                <li class="list-group-item">ID: {{i.id_pro}}</li>
+                                <li class="list-group-item">{{i.tipo.nom_tipo}}</li>
+                            </ul>
+                        </div>
+                        <div class="card" >
+                            <div class="btn" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary">Accion1</button>
+                            </div>
+                        </div>
+                        <div class="card" >
+                            <div class="btn" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary">Accion1</button>
+                            </div>
+                        </div>
+                        <div class="card" >
+                            <div class="btn" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary">Accion1</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <hr>
+            <div>
+                <!--<div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary">Accion1</button>
+                    <button type="button" class="btn btn-primary">Accion2</button>
+                    <button type="button" class="btn btn-primary">Accion3</button>
+                </div>
+                <div class="list-group">
+                    <div class="list-group">
+                        <div class="title bg-light">
+                            <div class="img">
+                                <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
+                            </div>   
+                            <div>
+                                <H2>{{i.nom_pro}}</h2>
+                                tipo: : {{i.tipo.nom_tipo}}
+                            </div>  
+                            <div>
+                                descripcion: : {{i.des_pro}}
+                            </div>
+                            <div class="">
+                                <h2 class="card-title">Stock: {{i.stock_pro}}</h2>
+                            </div>
+                            <div>
+                                <label class="text-info pull-right" name="iduser" id="iduser">id: {{i.id_pro}}</label>
+                                <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="info" data-bs-content="usuario comprador y fecha">Info</button>
+                            </div>
+                            <span class="pull-center pagado">
+                                <div  class=" row m-sm-auto">
+                                    <div  class="m-sm-auto">
+                                        <form id="login-form2" class="form" action="/updateing_pro/" method="POST">
+                                            {% csrf_token %}
+                                            <div>
+                                                Precio: $({{i.pric_pro}})
+                                            </div>
+                                            <input type="number" id="pric_pro" name="pric_pro" placeholder="$000.000">
+                                            <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">
+                                            <button value="submit" type="submit" name="submit2" class="btn btn-warning btn-filter" data-target="cancelado">EDITAR</button>
+                                        </form>
+                                    </div>
+                                    <div  class="row m-sm-auto">
+                                        <form id="login-form2" class="form" action="/deleteing_pro/" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">
+                                            <button value="submit" type="submit" name="submit2" class="btn btn-danger btn-filter" data-target="cancelado">Accion 2</button>
+                                        </form>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-danger">Accion1</button>
+                                        <button type="button" class="btn btn-danger">Accion2</button>
+                                        <button type="button" class="btn btn-danger">Accion3</button>
+                                    </div>
+                                </div>
+                            </span>   
+                        </div>
+                    </div>
+                    
+                    <hr>
+                </div>
+            </div>-->
+
+            {%endfor%}
+            
+        </tbody>
+                    
+        <div class="content-footer">
+            <p>
+                MusicPro © - 2022 <br>
+                Powered By equipo7</a>
+            </p>
+        </div>
+        
+    </div>
+
+{% endblock contenido %} 
