@@ -1,6 +1,7 @@
 import requests
 import json
 from django.shortcuts import render, HttpResponse, redirect
+from core.apiProducto import getAllPro, getProducto
 
 from core.apiProducto import getProducto
 
@@ -56,30 +57,49 @@ from core.apiProducto import getProducto
         self.session[]
         self.session.modified = True"""
 
-def tienda(request):
-    productos = Producto.objects.all()
-    return render(request, "tienda.html", {'productos': productos})
+class Carrito:
+    def __init__(self, request):
+        self.request = request
+        self.session = request.session
+        carrito = self.session.get("carrito")
+        if not carrito:
+            self.session["carrito"] = {}
+            self.carrito = self.session["carrito"]
+        else:
+            self.carrito = carrito
 
-def agregarProducto(request, producto.id):
-    carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto.id)
-    carrito.agregar(producto)
-    return redirect("core:tienda")
+    def agregar(self, producto):
+        id = str(producto.id)
+        if id not in self.carrito.keys():
+            self.carrito[id]={
+                "producto_id": producto.id,
+                "nombre": producto.nombre,
+                "acumulado": producto.precio,
+                "cantidad": 1,
+            }
+        else:
+            self.carrito[id]["cantidad"] += 1
+            self.carrito[id]["acumulado"] += producto.precio
+        self.guardar_carrito()
 
-def eliminarProducto(request, producto_id):
-    carrito = Carrito(request)
-    productos = Producto.objects.get(id=producto.id)
-    carrito.eliminar(producto)
-    return redirect("core:tienda")
+    def guardar_carrito(self):
+        self.session["carrito"] = self.carrito
+        self.session.modified = True
 
-def restar_producto(request, producto_id):
-    carrito = Carrito(request)
-    productos = Producto.objects.get(id=producto.id)
-    carrito.restar(producto)
-    return redirect("core:tienda")
+    def eliminar(self, producto):
+        id = str(producto.id)
+        if id in self.carrito:
+            del self.carrito[id]
+            self.guardar_carrito()
 
-def limpiar_carrito(request):
-    carrito = Carrito(request)
-    carrito.limpiar()
-    return redirect("core:tienda")
+    def restar(self, producto):
+        id = str(producto.id)
+        if id in self.carrito.keys():
+            self.carrito[id]["cantidad"] -= 1
+            self.carrito[id]["acumulado"] -= producto.precio
+            if self.carrito[id]["cantidad"] <= 0: self.eliminar(producto)
+            self.guardar_carrito()
 
+    def limpiar(self):
+        self.session["carrito"] = {}
+        self.session.modified = True
