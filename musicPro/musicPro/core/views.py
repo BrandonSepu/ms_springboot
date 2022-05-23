@@ -23,7 +23,7 @@ def log_in(request):
     return render(request, 'web/login.html')
 
 def loginning(request):
-    try
+    try:
         email_user = request.POST["email_user"]
         pass_user = request.POST["password"]
         status = login(email_user,pass_user)
