@@ -39,7 +39,7 @@ def loginning(request):
             elif data["tipo_user"] == "Bodeguero": 
                 return redirect("bodega")
             elif data["tipo_user"] == "Vendedor": 
-                return redirect("data_product")
+                return redirect("re_vende")
             elif data["tipo_user"] == "Contador": 
                 return redirect("venta")
         else:
@@ -106,7 +106,7 @@ def data_user(request):
     }
     
 
-    return render(request, 'web/data_user.html', context)
+    return render(request, 'admin/data_user.html', context)
 
 def deleteing(request):
     id_user = request.POST["id_user"]
@@ -154,7 +154,7 @@ def data_products(request):
                 "datalen" : datalen,
                 }
 
-    return render(request, 'product/data_products.html', context)
+    return render(request, 'admin/data_products.html', context)
 
 def reg_product(request):
     data = getAllTipoPro()
@@ -231,8 +231,6 @@ def registering_pro(request):
         print(e)
         
 
-
-
 def deleteing_pro(request):
     id_pro = request.POST["id_pro"]
     print(id_pro)
@@ -243,15 +241,38 @@ def updateing_pro(request):
     
     try:
         if request.method == "POST":
+
             pric_pro = request.POST["pric_pro"]
             id_pro = request.POST["id_pro"] 
             data = getProducto(id_pro)
             nom_pro = data["nom_pro"]
             des_pro = data["des_pro"]
-            tipo_id_tipo= data["tipo_id_tipo"]
+            desc_pro = data["desc_pro"]
+            tipo_id_tipo= data["tipo"]
+            #print("resultado id_tipo = " + str(tipo_id_tipo))
             stock_pro = data["stock_pro"]
             img_pro = data["img_pro"]
-            updateProducto(id_pro,nom_pro,des_pro,str(pric_pro),tipo_id_tipo,stock_pro,img_pro)
+            updateProducto(id_pro,nom_pro,des_pro,str(pric_pro),stock_pro,desc_pro,img_pro,tipo_id_tipo)
+            return redirect("data_products")
+        else:
+            print("error desconocido :C")
+    except Exception as e:
+        print(e)
+
+def updateing_pro_descuento(request):
+    try:
+        if request.method == "POST":
+            desc_pro = request.POST["desc_pro"]
+            id_pro = request.POST["id_pro"] 
+            data = getProducto(id_pro)
+            nom_pro = data["nom_pro"]
+            des_pro = data["des_pro"]
+            tipo= data["tipo"]
+            stock_pro = data["stock_pro"]
+            img_pro = data["img_pro"]
+            pric_pro = data["pric_pro"]
+            
+            updateProducto(id_pro,nom_pro,des_pro,pric_pro,stock_pro,desc_pro,img_pro,tipo)
             return redirect("data_products")
         else:
             print("error desconocido :C")

@@ -10,7 +10,7 @@ def getAllPro():
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             data = respuesta.json()
-            pprint(data)
+            #pprint(data)
             print(print("se logró"+ str(respuesta)))
         else:
             print(print("NO se logró" + str(respuesta)))
@@ -26,10 +26,10 @@ def getProducto(id):
         url="https://springbootproductos.herokuapp.com/productos/"+ str(id)
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
-            print(print("se logró"+ str(respuesta)))
+            #print(print("se logró"+ str(respuesta)))
             data = respuesta.json()
-            print(str(respuesta))
-            print(data)
+            #print(str(respuesta))
+            #print(data)
             return data
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta)))
@@ -92,21 +92,18 @@ def loadProducto(nom_pro,des_pro,pric_pro,stock_pro,tipo_id_tipo,img_pro):
 
 #loadProducto("Guitarra","madera cahoba profesional Fender","90000",2, 12)  
 
-def updateProducto(id_pro,nom_pro,des_pro,pric_pro,tipo_id_tipo,stock_pro,img_pro):
+def updateProducto(id_pro,nom_pro,des_pro,pric_pro,stock_pro,desc_pro,img_pro,tipo):
     try:
         url="https://springbootproductos.herokuapp.com/updateProduct"
         respuesta = False
-    
-        if len(pric_pro) <= 10:
-            dato = {'id_pro': id_pro,"nom_pro":nom_pro,"des_pro":des_pro,
-            "pric_pro":pric_pro,"tipo_id_tipo":tipo_id_tipo,"stock_pro":stock_pro,"img_pro":img_pro}
-            respuesta = requests.put(url, json = dato )
-            if respuesta.status_code == 200:
-                print("se logró"+ str(respuesta))
-            else:
-                print("NO se logró, id no encontrada"+ str(respuesta))
+        dato = {'id_pro': id_pro,"nom_pro":nom_pro,"des_pro":des_pro,
+        "pric_pro":pric_pro,"stock_pro":stock_pro,"desc_pro":desc_pro,"img_pro":img_pro,"tipo":tipo}
+        respuesta = requests.put(url, json = dato )
+        if respuesta.status_code == 200:
+            print("se logró"+ str(respuesta))
         else:
-            print("el largo del rut excede el maximo")
+            print("NO se logró, id no encontrada"+ str(respuesta))
+        
     except Exception as e:
         print("No se logró, hubo un error")
         print(e)

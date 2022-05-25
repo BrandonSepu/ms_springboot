@@ -22,6 +22,8 @@ public class productsModel implements Serializable{
     private String pric_pro;
     @Column(name = "stock_pro")
     private int stock_pro;
+    @Column(name = "desc_pro")
+    private int desc_pro;
     @Lob
     @Column(name = "img_pro")
     private byte[] img_pro;
@@ -32,19 +34,13 @@ public class productsModel implements Serializable{
     public productsModel() {
     }
 
-    public productsModel(String nom_pro, String des_pro, String pric_pro, int stock_pro, tipoModel tipo) {
+    public productsModel(int id_pro, String nom_pro, String des_pro, String pric_pro, int stock_pro, int desc_pro, byte[] img_pro, tipoModel tipo) {
+        this.id_pro = id_pro;
         this.nom_pro = nom_pro;
         this.des_pro = des_pro;
         this.pric_pro = pric_pro;
         this.stock_pro = stock_pro;
-        this.tipo = tipo;
-    }
-
-    public productsModel(String nom_pro, String des_pro, String pric_pro, int stock_pro, byte[] img_pro, tipoModel tipo) {
-        this.nom_pro = nom_pro;
-        this.des_pro = des_pro;
-        this.pric_pro = pric_pro;
-        this.stock_pro = stock_pro;
+        this.desc_pro = desc_pro;
         this.img_pro = img_pro;
         this.tipo = tipo;
     }
@@ -81,12 +77,20 @@ public class productsModel implements Serializable{
         this.pric_pro = pric_pro;
     }
 
-    public tipoModel getTipo() {
-        return tipo;
+    public int getStock_pro() {
+        return stock_pro;
     }
 
-    public void setTipo(tipoModel tipo) {
-        this.tipo = tipo;
+    public void setStock_pro(int stock_pro) {
+        this.stock_pro = stock_pro;
+    }
+
+    public int getDesc_pro() {
+        return desc_pro;
+    }
+
+    public void setDesc_pro(int desc_pro) {
+        this.desc_pro = desc_pro;
     }
 
     public byte[] getImg_pro() {
@@ -97,11 +101,11 @@ public class productsModel implements Serializable{
         this.img_pro = img_pro;
     }
 
-    public int getStock_pro() {
-        return stock_pro;
+    public tipoModel getTipo() {
+        return tipo;
     }
 
-    public void setStock_pro(int stock_pro) {
-        this.stock_pro = stock_pro;
+    public void setTipo(tipoModel tipo) {
+        this.tipo = tipo;
     }
 }

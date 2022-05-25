@@ -17,7 +17,7 @@ public class DetalleServiceImp implements DetalleService{
 
     @Override
     public boolean createDetalleVenta(detalleVenModel DetalleVenta) {
-        if(daoDetVenImp.getDetVen(DetalleVenta.getId_detVen())==null) {
+        if(daoDetVenImp.getDetVen(DetalleVenta.getId_detven())==null) {
             daoDetVenImp.createDetVen(DetalleVenta);
             msg = "Detalle de venta agregado a la bodega correctamente";
             System.out.println(msg);
@@ -59,7 +59,7 @@ public class DetalleServiceImp implements DetalleService{
 
     @Override
     public void updateDetalleVenta(detalleVenModel DetalleVenta) {
-        if (daoDetVenImp.getDetVen(DetalleVenta.getId_detVen())!=null){
+        if (daoDetVenImp.getDetVen(DetalleVenta.getId_detven())!=null){
             daoDetVenImp.updateDetVen(DetalleVenta);
         };
         msg = "Detalle de venta no encontrado";

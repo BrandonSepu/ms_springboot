@@ -22,7 +22,7 @@
         <div class="row">
 
             <section class="content">
-                <h1>Productos Registrados</h1>
+                <h1><a href="{% url 're_admin' %}" class="btn btn-success">Atras</a>Productos Registrados</h1>
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -37,27 +37,31 @@
                                         <div>
                                             <div class="list-group">
                                                 <div class="list-group">
-                                                    <div class="title bg-light">
-                                                        <div class="img">
-                                                            <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
-                                                        </div>   
-                                                        <div>
-                                                            <H2>{{i.nom_pro}}</h2>
-                                                            tipo: : {{i.tipo.nom_tipo}}
-                                                        </div>  
-                                                        <div>
-                                                            descripcion: : {{i.des_pro}}
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="img">
+                                                                <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
+                                                            </div>   
+                                                              
                                                         </div>
-                                                        <div class="">
-                                                            <h6 class="card-title">Stock: {{i.stock_pro}}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <label for="remember-me" class="text-info pull-right" name="iduser" id="iduser">id: {{i.id_pro}}</label><br>
-                                                        </div>
+                                                        <div class="col">
+                                                            <div>
+                                                                <H2>{{i.nom_pro}}</h2>
+                                                                tipo: : {{i.tipo.nom_tipo}}
+                                                            </div>
+                                                            <div>
+                                                                descripcion: : {{i.des_pro}}
+                                                            </div>
+                                                            <div class="">
+                                                                <h6 class="card-title">Stock: {{i.stock_pro}}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <label for="remember-me" class="text-info pull-right" name="iduser" id="iduser">id: {{i.id_pro}}</label><br>
+                                                            </div>
+                                                        </div> 
                                                         <span class="pull-center pagado">
-                                                            
-                                                            <div  class=" row m-sm-auto">
-                                                                <div  class="m-sm-auto">
+                                                            <div  class="row">
+                                                                <div  class="col">
                                                                     <form id="login-form2" class="form" action="/updateing_pro/" method="POST">
                                                                         {% csrf_token %}
                                                                         <div>
@@ -68,7 +72,18 @@
                                                                         <button value="submit" type="submit" name="submit2" class="btn btn-warning btn-filter" data-target="cancelado">EDITAR</button>
                                                                     </form>
                                                                 </div>
-                                                                <div  class="row m-sm-auto">
+                                                                <div  class="col">
+                                                                    <form id="login-form2" class="form" action="/updateing_pro_descuento/" method="POST">
+                                                                        {% csrf_token %}
+                                                                        <div>
+                                                                            Descuento = {{i.desc_pro}} %
+                                                                        </div>
+                                                                        <input type="number" id="desc_pro" name="desc_pro" placeholder="50%">
+                                                                        <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">
+                                                                        <button value="submit" type="submit" name="submit2" class="btn btn-warning btn-filter" data-target="cancelado">EDITAR</button>
+                                                                    </form>
+                                                                </div>
+                                                                <div  class="accordion-item">
                                                                     <form id="login-form2" class="form" action="/deleteing_pro/" method="POST">
                                                                         {% csrf_token %}
                                                                         <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">

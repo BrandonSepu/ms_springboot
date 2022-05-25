@@ -23,6 +23,8 @@ urlpatterns = [
     path("registering_pro/", views.registering_pro, name="registering_pro"),
     path("deleteing_pro/", views.deleteing_pro, name="deleteing_pro"),
     path("updateing_pro/", views.updateing_pro, name="updateing_pro"),
+    path("updateing_pro_descuento/", views.updateing_pro_descuento, name="updateing_pro_descuento"),
+    path("tienda/", views.tienda, name="tienda"),
     #carrito
     path("tienda", views.tienda, name="tienda"),
     #ventas

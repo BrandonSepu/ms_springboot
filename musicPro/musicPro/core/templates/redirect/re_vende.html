@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'web/base.html' %}
+{% load static %}
+{% block contenido %}
+  
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    {% endblock css %}
+    <!-- CARROUSEL-->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="text-center alert-success bg-success {{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="container" >
+        
+        <h1>Administrador</h1>
+        <hr>
+        <tbody>
+            <div class="text-center">
+                <div class="row" >
+                    <div class="col text-center" role="group" aria-label="Basic example">
+                        <a href="{% url 'data_user' %}" class="btn btn-warning"><h3>Informacion sobre husuarios<h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="row" >
+                    <div class="col text-center" role="group" aria-label="Basic example">
+                        <a href="{% url 'data_products' %}" class="btn btn-success"><h3>Productos y Estrategias de venta<h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="row" >
+                    <div class="col text-center" role="group" aria-label="Basic example">
+                        <a href="{% url 'informes' %}" class="btn btn-primary"><h3>Informes<h3></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </tbody>
+                    
+        <div class="content-footer">
+            <p>
+                MusicPro © - 2022 <br>
+                Powered By equipo7</a>
+            </p>
+        </div>
+        
+    </div>
+
+{% endblock contenido %} 

@@ -19,27 +19,34 @@ public class detalleVenModel implements Serializable{
     private String user_det;
     @Column(name = "hora_det")
     private String hora_det;
+    @Column(name = "cantidad_det")
+    private String cantidad_det;
+    @Column(name = "estado_det")
+    private String estado_det;
     @Column(name = "fecha_det")
     private String fecha_det;
-    @Column(name = "tipopago_id_tpag")
-    private String tipopago_id_tpag;
+    @ManyToOne
+    @JoinColumn(name = "tipopago.id_tpag")
+    private tipoPagoModel tipoPago;
 
     public detalleVenModel() {
     }
 
-    public detalleVenModel(String producto_det, String user_det, String hora_det, String fecha_det, String tipopago_id_tpag) {
+    public detalleVenModel(String producto_det, String user_det, String hora_det, String cantidad_det, String estado_det, String fecha_det, tipoPagoModel tipoPago) {
         this.producto_det = producto_det;
         this.user_det = user_det;
         this.hora_det = hora_det;
+        this.cantidad_det = cantidad_det;
+        this.estado_det = estado_det;
         this.fecha_det = fecha_det;
-        this.tipopago_id_tpag = tipopago_id_tpag;
+        this.tipoPago = tipoPago;
     }
 
-    public int getId_detVen() {
+    public int getId_detven() {
         return id_detven;
     }
 
-    public void setId_detVen(int id_detven) {
+    public void setId_detven(int id_detven) {
         this.id_detven = id_detven;
     }
 
@@ -67,6 +74,22 @@ public class detalleVenModel implements Serializable{
         this.hora_det = hora_det;
     }
 
+    public String getCantidad_det() {
+        return cantidad_det;
+    }
+
+    public void setCantidad_det(String cantidad_det) {
+        this.cantidad_det = cantidad_det;
+    }
+
+    public String getEstado_det() {
+        return estado_det;
+    }
+
+    public void setEstado_det(String estado_det) {
+        this.estado_det = estado_det;
+    }
+
     public String getFecha_det() {
         return fecha_det;
     }
@@ -75,11 +98,11 @@ public class detalleVenModel implements Serializable{
         this.fecha_det = fecha_det;
     }
 
-    public String getTipopago_id_tpag() {
-        return tipopago_id_tpag;
+    public tipoPagoModel getTipoPago() {
+        return tipoPago;
     }
 
-    public void setTipopago_id_tpag(String tipopago_id_tpag) {
-        this.tipopago_id_tpag = tipopago_id_tpag;
+    public void setTipoPago(tipoPagoModel tipoPago) {
+        this.tipoPago = tipoPago;
     }
 }
