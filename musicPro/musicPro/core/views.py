@@ -4,10 +4,12 @@ from contextlib import ContextDecorator
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 import json
+from core.Carrito import Carrito
 from core.apiProducto import delProductoById, getAllPro, getProducto, loadProducto, updateProducto
 from core.apiTipoProducto import getAllTipoPro
 from core.apiUser import delUserById, getAllUsers, getUserByEmail, loadUser, login, updateUser
 from django.contrib import messages
+from core.models import Producto
 
 # Create your views here.
 #GENERALES
@@ -292,13 +294,6 @@ def tienda(request):
   
   #CARRITO
 
-"""from django.shortcuts import render, HttpResponse, redirect
-
-# Create your views here.
-from CarritoApp.Carrito import Carrito
-from CarritoApp.models import Producto
-
-
 def tienda(request):
     #return HttpResponse("Hola Pythonizando")
     productos = Producto.objects.all()
@@ -325,4 +320,4 @@ def restar_producto(request, producto_id):
 def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
-    return redirect("Tienda")"""
+    return redirect("Tienda")
