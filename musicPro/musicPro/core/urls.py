@@ -24,21 +24,21 @@ urlpatterns = [
     path("deleteing_pro/", views.deleteing_pro, name="deleteing_pro"),
     path("updateing_pro/", views.updateing_pro, name="updateing_pro"),
     path("updateing_pro_descuento/", views.updateing_pro_descuento, name="updateing_pro_descuento"),
-    path("tienda/", views.tienda, name="tienda"),
     #carrito
-    path("tienda", views.tienda, name="tienda"),
+    path("carrito/", views.carrito , name="carrito"),
     #ventas
     path("venta/", views.venta, name="venta"),
     #redirect
     path("re_admin/", views.re_admin, name="re_admin"),
     #ADMIN
     path("informes/", views.informes, name="informes"),
+    path("agregar<id_pro>/", views.agregar_producto, name="add"),
+    path("eliminar<id_pro>/", views.eliminar_producto, name="del"),
+    path("restar<id_pro>/", views.restar_producto, name="sub"),
+    path("limpiar/", views.limpiar_carrito, name="CLS"),
 
-    path("tienda/", views.tienda, name="tienda"),
+    
     
 ]
 '''path("carrito/", views.carrito , name="carrito"),
-    path("agregar<id_pro>/", views.agregarProducto, name="add"),
-    path("eliminar<id_pro>/", views.eliminar_producto, name="del"),
-    path("restar<id_pro>/", views.restar_producto, name="sub"),
-    path("limpiar/", views.limpiar_carrito, name="CLS"),'''
+    '''
