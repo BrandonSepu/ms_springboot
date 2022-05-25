@@ -309,9 +309,11 @@ def informes(request):
   #CARRITO
 
 def carrito(request):
-    #return HttpResponse("Hola Pythonizando")
+    #return HttpResponse("Hola Pythonizando"
     productos = Producto.objects.all()
-    return render(request, "web/carrito.html", {'productos':productos})
+    data = getAllPro()
+    context = {"data" : data,'productos':productos}
+    return render(request, "web/carrito.html", context)
 
 def agregar_producto(request, producto_id):
     carrito = Carrito(request)
