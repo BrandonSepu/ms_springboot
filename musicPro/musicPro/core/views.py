@@ -249,12 +249,12 @@ def updateing_pro(request):
             data = getProducto(id_pro)
             nom_pro = data["nom_pro"]
             des_pro = data["des_pro"]
-            desc_pro = data["desc_pro"]
+            desc_pro = 1
             tipo_id_tipo= data["tipo"]
             #print("resultado id_tipo = " + str(tipo_id_tipo))
             stock_pro = data["stock_pro"]
             img_pro = data["img_pro"]
-            updateProducto(id_pro,nom_pro,des_pro,str(pric_pro),stock_pro,desc_pro,img_pro,tipo_id_tipo)
+            updateProducto(id_pro,nom_pro,des_pro,str(pric_pro),stock_pro,str(desc_pro),img_pro,tipo_id_tipo)
             return redirect("data_products")
         else:
             print("error desconocido :C")
@@ -272,9 +272,13 @@ def updateing_pro_descuento(request):
             tipo= data["tipo"]
             stock_pro = data["stock_pro"]
             img_pro = data["img_pro"]
-            pric_pro = data["pric_pro"]
+            pric_pro = (data["pric_pro"])
+            desc_pro = (int(desc_pro)/100)
+            print(desc_pro)
+            pric_pro = (int(pric_pro) -(int(pric_pro)*(desc_pro)))
+            print(pric_pro)
             
-            updateProducto(id_pro,nom_pro,des_pro,pric_pro,stock_pro,desc_pro,img_pro,tipo)
+            updateProducto(id_pro,nom_pro,des_pro,str(pric_pro),stock_pro,desc_pro,img_pro,tipo)
             return redirect("data_products")
         else:
             print("error desconocido :C")
@@ -315,16 +319,20 @@ def carrito(request):
     context = {"data" : data,'productos':productos}
     return render(request, "web/carrito.html", context)
 
-def agregar_producto(request, producto_id):
+def agregar_producto(request):
     carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
+    id_pro1 = request.POST["id_pro"]
+    producto = Producto.objects.get(id_pro=id_pro1)
     carrito.agregar(producto)
+    print(producto)
+    print(carrito)
     return redirect("carrito")
 
 def eliminar_producto(request, producto_id):
     carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
+    producto = Producto.objects.get(id_pro=producto_id)
     carrito.eliminar(producto)
+    print("se elimino el producto: " + producto)
     return redirect("carrito")
 
 def restar_producto(request, producto_id):

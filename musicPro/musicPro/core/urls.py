@@ -32,7 +32,7 @@ urlpatterns = [
     path("re_admin/", views.re_admin, name="re_admin"),
     #ADMIN
     path("informes/", views.informes, name="informes"),
-    path("agregar<id_pro>/", views.agregar_producto, name="add"),
+    path("agregar_producto/", views.agregar_producto, name="agregar_producto"),
     path("eliminar<id_pro>/", views.eliminar_producto, name="del"),
     path("restar<id_pro>/", views.restar_producto, name="sub"),
     path("limpiar/", views.limpiar_carrito, name="CLS"),

@@ -1,23 +1,24 @@
 /*nuevo*/
 .box
 {
+    
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
 }
 .card
 {
-    margin-top: 80px;
-    height: 300px;
+    margin-top: 10px;
+    
     transition: 0.5s;
 }
 .card:hover
 {
     border: 1px solid rgb(10, 33, 236);
-    border-radius: 30px;
+    border-radius: 10px;
 }
 .card .cardImg
 {
-    height: 150px;
+    height: 250px;
     width: 90%;
     position: relative;
     top: -15px;

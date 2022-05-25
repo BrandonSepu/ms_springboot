@@ -20,7 +20,6 @@
     <div class="container">
         <div class="row">
             {% for i in data %}
-        
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="box card">
                         <div class="box cardImg">
@@ -28,34 +27,25 @@
                         </div>
                         <div class="info">
                             <h3>{{i.nom_pro}}</h3>
-                            <p><span>{{i.tipo.nom_tipo}}</span> Stock: {{i.stock_pro}}</p>
-                            <p><span>{{i.des_pro}}</span>
-                            <p><span>{{i.pric_pro}} CLP</span>
+                            <p class="bg-info"><span>{{i.tipo.nom_tipo}}</span> Stock: {{i.stock_pro}}</p>
+                            <p>{{i.des_pro}}
+                                <!--{%if i.desc_pro > 0%}
+                                <span class="bg-warning">DESCUENTO: {{i.desc_pro}} %</span>
+                                {% endif %}-->
+                            </p>
+                            <p><span class="bg-info">{{i.pric_pro}} CLP</span></p>
                             <button class="btn btn-success btn-filter">Lo quiero</button>
+                            <br>
                         </div>
                     </div>
                 </div>
-                    <!--<div class="card">
-                        <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{i.nom_pro}}</h5>
-                            <div class="container">
-                                <p class="card-title">{{i.tipo.nom_tipo}}</p>
-                            </div>
-                            <p class="card-text">{{i.des_pro}}</p>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title">Stock: {{i.stock_pro}}</h6>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">{{i.pric_pro}} CLP</small> | <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter" data-target="cancelado">Lo quiero</button>
-                        </div>
-                    </div>-->
-        
+                
             {%endfor%}
+            <br>
         </div>
+        <br>
     </div>
+    <br>
     <hr>
             
     

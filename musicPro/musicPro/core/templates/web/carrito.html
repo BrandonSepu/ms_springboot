@@ -12,7 +12,7 @@
     </button>
     <div href="{% url 'login' %}" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Carrito de compras</h5>
+        <h5 >Carrito de compras</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -80,6 +80,8 @@
         <div class="col-md-12">
             <div class="title-header text-center">
                 <br>
+                <br>
+                <br>
                 <h1>Productos</h1>
             </div>
         </div>
@@ -98,27 +100,14 @@
                             <p><span>{{i.tipo.nom_tipo}}</span> Stock: {{i.stock_pro}}</p>
                             <p><span>{{i.des_pro}}</span>
                             <p><span>{{i.pric_pro}} CLP</span>
-                            <button class="btn btn-success btn-filter">Lo quiero</button>
+                            <form id="login-form2" class="form" action="/agregar_producto/" method="POST">
+                              {% csrf_token %}
+                              <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">
+                              <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter" data-target="cancelado">Lo quiero!</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                    <!--<div class="card">
-                        <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{i.nom_pro}}</h5>
-                            <div class="container">
-                                <p class="card-title">{{i.tipo.nom_tipo}}</p>
-                            </div>
-                            <p class="card-text">{{i.des_pro}}</p>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title">Stock: {{i.stock_pro}}</h6>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">{{i.pric_pro}} CLP</small> | <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter" data-target="cancelado">Lo quiero</button>
-                        </div>
-                    </div>-->
         
             {%endfor%}
         </div>
