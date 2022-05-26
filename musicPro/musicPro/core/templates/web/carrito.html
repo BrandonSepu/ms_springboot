@@ -30,17 +30,25 @@
     </tr>
   </thead>
   <tbody>
-  {% if request.login.carrito.items %}
-  {% for key, value in request.login.carrito.items %}
+  {% if request.session.carrito.items %}
     <tr>
-      <td>{{value.nombre}}</td>
-      <td>{{value.precio}}</td>
-      <td>{{value.acumulado}}
-        <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
-        <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
-      </td>
+      <th scope="row" colspan="3" class="text-center">si hay productos</th>
     </tr>
-  {% endfor %}
+    {% for key, value in request.session.carrito.items %}
+      <tr>
+        <td>{{value.nombre}} id: {{value.producto_id}}</td>
+        <td>{{value.precio}}</td>
+        <td>{{value.acumulado}}
+          <!--<a href="{% url 'agregar_producto1'%}" class="badge btn btn-dark badge-dark">+</a>-->
+          <form id="login-form2" class="form" action="/agregar_producto1/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" id="id_pro" name="id_pro" value="{{value.producto_id}}">
+            <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter" data-target="cancelado">+</button>
+          </form>
+          <a href="{% url 'sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
+        </td>
+      </tr>
+    {% endfor %}
   {% else %}
   <tr>
       <td colspan="3">
@@ -100,7 +108,7 @@
                             <p><span>{{i.tipo.nom_tipo}}</span> Stock: {{i.stock_pro}}</p>
                             <p><span>{{i.des_pro}}</span>
                             <p><span>{{i.pric_pro}} CLP</span>
-                            <form id="login-form2" class="form" action="/agregar_producto/" method="POST">
+                            <form id="login-form2" class="form" action="/agregar_producto1/" method="POST">
                               {% csrf_token %}
                               <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">
                               <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter" data-target="cancelado">Lo quiero!</button>

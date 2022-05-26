@@ -319,7 +319,13 @@ def carrito(request):
     context = {"data" : data,'productos':productos}
     return render(request, "web/carrito.html", context)
 
-def agregar_producto(request):
+'''def agregar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.agregar(producto)
+    return redirect("carrito")'''
+
+def agregar_producto1(request):
     carrito = Carrito(request)
     id_pro1 = request.POST["id_pro"]
     producto = Producto.objects.get(id_pro=id_pro1)

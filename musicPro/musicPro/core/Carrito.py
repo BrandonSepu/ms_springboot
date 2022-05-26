@@ -15,15 +15,15 @@ class Carrito:
             self.carrito[id]={
                 "producto_id": producto.id,
                 "nombre": producto.nom_pro,
-                "acumulado": producto.pric_pro,
+                "acumulado": int(producto.pric_pro),
                 "cantidad": 1,
             }
             print("se agrego el producto")
-            print(producto)
+            print(self.carrito[id]["producto_id"])
         else:
             print("se agrego el producto por segunda vez")
             self.carrito[id]["cantidad"] += 1
-            self.carrito[id]["acumulado"] += producto.pric_pro
+            self.carrito[id]["acumulado"] += int(producto.pric_pro)
         self.guardar_carrito()
 
     def guardar_carrito(self):
