@@ -31,22 +31,26 @@
   </thead>
   <tbody>
   {% if request.session.carrito.items %}
-    <tr>
-      <th scope="row" colspan="3" class="text-center">si hay productos</th>
-    </tr>
     {% for key, value in request.session.carrito.items %}
       <tr>
-        <td>{{value.nombre}} id: {{value.producto_id}}</td>
-        <td>{{value.precio}}</td>
-        <td>{{value.acumulado}}
-          <!--<a href="{% url 'agregar_producto1'%}" class="badge btn btn-dark badge-dark">+</a>-->
-          <form id="login-form2" class="form" action="/agregar_producto1/" method="POST">
-            {% csrf_token %}
-            <input type="hidden" id="id_pro" name="id_pro" value="{{value.producto_id}}">
-            <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter" data-target="cancelado">+</button>
-          </form>
-          <a href="{% url 'sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
-        </td>
+        <td>{{value.nombre}}</td>
+        <td>{{value.acumulado}}</td>
+        <div class="raw">
+          <td>
+            {{value.cantidad}}
+            <form id="login-form2" class="form col" action="/agregar_producto1/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" id="id_pro" name="id_pro" value="{{value.id_pro}}">
+              <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter btn-sm btn-group-sm" >+</button>
+            </form>
+            <form id="login-form2" class="form col" action="/restar_producto/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" id="id_pro" name="id_pro" value="{{value.id_pro}}">
+              <button value="submit" type="submit" name="submit2" class="btn btn-danger btn-filter btn-sm" >-</button>
+            </form>
+          </td>
+        </div>
+        
       </tr>
     {% endfor %}
   {% else %}
@@ -66,7 +70,7 @@
 </div>
 <div class="row text-center">
     <div class="col-6"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
-    <div class="col-6"><a href="#" class="btn btn-success">Guardar</a></div>
+    <div class="col-6"><a href="{% url 'save_carrito' %}" class="btn btn-success">Guardar</a></div>
 </div>
    
 </div>

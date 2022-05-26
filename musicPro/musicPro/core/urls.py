@@ -35,8 +35,9 @@ urlpatterns = [
     #path("agregar_producto<int:id_pro>/", views.agregar_producto, name="agregar_producto"),
     path("agregar_producto1/", views.agregar_producto1, name="agregar_producto1"),
     path("eliminar<int:id_pro>/", views.eliminar_producto, name="del"),
-    path("restar<int:id_pro>/", views.restar_producto, name="sub"),
+    path("restar_producto/", views.restar_producto, name="restar_producto"),
     path("limpiar/", views.limpiar_carrito, name="CLS"),
+    path("save_carrito/", views.save_carrito, name="save_carrito"),
 
     
     

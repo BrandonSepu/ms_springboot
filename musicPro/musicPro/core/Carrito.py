@@ -14,16 +14,19 @@ class Carrito:
         if id not in self.carrito.keys():
             self.carrito[id]={
                 "producto_id": producto.id,
+                "id_pro": producto.id_pro,
                 "nombre": producto.nom_pro,
                 "acumulado": int(producto.pric_pro),
                 "cantidad": 1,
             }
-            print("se agrego el producto")
-            print(self.carrito[id]["producto_id"])
+            #print("se agrego el producto")
+            #print("id del producto" + str(self.carrito[id]["id_pro"]))
+            #print("id_pro" + id)
         else:
-            print("se agrego el producto por segunda vez")
+            #print("se agrego el producto por segunda vez")
             self.carrito[id]["cantidad"] += 1
             self.carrito[id]["acumulado"] += int(producto.pric_pro)
+            #print("acumulado: " + str(self.carrito[id]["acumulado"]))
         self.guardar_carrito()
 
     def guardar_carrito(self):
@@ -37,14 +40,16 @@ class Carrito:
             self.guardar_carrito()
 
     def restar(self, producto):
-        id = str(producto.id)
+        id = str(producto.id_pro)
         if id in self.carrito.keys():
             self.carrito[id]["cantidad"] -= 1
-            self.carrito[id]["acumulado"] -= producto.pric_pro
+            self.carrito[id]["acumulado"] -= int(producto.pric_pro)
             if self.carrito[id]["cantidad"] <= 0: self.eliminar(producto)
             self.guardar_carrito()
 
     def limpiar(self):
         self.session["carrito"] = {}
         self.session.modified = True
+
+        
 

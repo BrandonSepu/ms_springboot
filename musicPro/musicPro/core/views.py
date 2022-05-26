@@ -1,6 +1,7 @@
 
 import base64
 from contextlib import ContextDecorator
+from pprint import pprint
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 import json
@@ -319,35 +320,45 @@ def carrito(request):
     context = {"data" : data,'productos':productos}
     return render(request, "web/carrito.html", context)
 
-'''def agregar_producto(request, producto_id):
-    carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
-    carrito.agregar(producto)
-    return redirect("carrito")'''
 
 def agregar_producto1(request):
     carrito = Carrito(request)
     id_pro1 = request.POST["id_pro"]
     producto = Producto.objects.get(id_pro=id_pro1)
     carrito.agregar(producto)
-    print(producto)
-    print(carrito)
+    #print(producto)
+    #print(carrito)
     return redirect("carrito")
 
 def eliminar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id_pro=producto_id)
     carrito.eliminar(producto)
-    print("se elimino el producto: " + producto)
+    #print("se elimino el producto: " + producto)
     return redirect("carrito")
 
-def restar_producto(request, producto_id):
+def restar_producto(request):
     carrito = Carrito(request)
-    producto = Producto.objects.get(id=producto_id)
+    id_pro1 = request.POST["id_pro"]
+    producto = Producto.objects.get(id_pro=id_pro1)
     carrito.restar(producto)
     return redirect("carrito")
 
 def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
+    return redirect("carrito")
+
+def save_carrito(request):
+    carrito = Carrito(request)
+    carrito.guardar_carrito
+    data = (carrito.__dict__)
+    
+    for d in data["carrito"]:
+        
+        id_pro = (int(d))
+        product = getProducto(d)
+        
+
+
     return redirect("carrito")
