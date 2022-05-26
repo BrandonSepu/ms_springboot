@@ -18,7 +18,9 @@ urlpatterns = [
     #data_info_products
     path("productos/", views.productos, name="productos"),
     path("data_products/", views.data_products, name="data_products"),
+    #BODEGA
     path("bodega/", views.bodega, name="bodega"),
+    path("bodega_aprueba/", views.bodega_aprueba, name="bodega_aprueba"),
     path("reg_product/", views.reg_product, name="reg_product"),
     path("registering_pro/", views.registering_pro, name="registering_pro"),
     path("deleteing_pro/", views.deleteing_pro, name="deleteing_pro"),
@@ -38,6 +40,15 @@ urlpatterns = [
     path("restar_producto/", views.restar_producto, name="restar_producto"),
     path("limpiar/", views.limpiar_carrito, name="CLS"),
     path("save_carrito/", views.save_carrito, name="save_carrito"),
+    #VENDEDOR
+    path("vendedor/", views.vendedor, name="vendedor"),
+    path("vendedor_aprueba/", views.vendedor_aprueba, name="vendedor_aprueba"),
+    path("vendedor_rechaza/", views.vendedor_rechaza, name="vendedor_rechaza"),
+    #CONTADOR
+    path("contador/", views.contador, name="contador"),
+    path("contador_aprueba/", views.contador_aprueba, name="contador_aprueba"),
+    path("contador_rechaza/", views.contador_rechaza, name="contador_rechaza"),
+
 
     
     

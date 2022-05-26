@@ -18,7 +18,7 @@ def getAllVentas():
     except Exception as e:
         print(e)
 
-getAllVentas()
+#getAllVentas()
 
 def getVenta(id):
 

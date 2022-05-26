@@ -20,9 +20,10 @@
 
     <div class="container" >
         
-        <h1>Pedidos Aceptados | Vendedor</h1>
+        <h1>Pedidos Aprobados | Contador</h1>
         <hr>
         <tbody>
+            
             <div class="card-group container">
                 
                 <table class="table table-success table-striped">
@@ -38,7 +39,7 @@
                       </tr>
                     </thead>
                     {% for i in data %}
-                        {%if i.estado_det == "Aceptado"%}
+                        {%if i.estado_det == "Aprobado"%}
                         <tbody>
                             <tr>
                                 <th scope="row">{{i.id_detven}}</th>
@@ -50,14 +51,14 @@
                                 <td>
                                     <div class="row" >
                                         <div class="col text-center" role="group" aria-label="Basic example">
-                                            <form id="login-form2" class="form" action="/vendedor_aprueba/" method="POST">
+                                            <form id="login-form2" class="form" action="/contador_aprueba/" method="POST">
                                                 {% csrf_token %}
                                                 <input type="hidden" id="id_detven" name="id_detven" value="{{i.id_detven}}">
-                                                <button value="submit" type="submit" name="submit2" class="btn btn-success btn-sm">CONFIRMAR PEDIDO</button>
+                                                <button value="submit" type="submit" name="submit2" class="btn btn-success btn-sm">PEDIDO PAGADO</button>
                                             </form>
                                         </div>
                                         <div class="col text-center" role="group" aria-label="Basic example">
-                                            <form id="login-form2" class="form" action="/vendedor_rechaza/" method="POST">
+                                            <form id="login-form2" class="form" action="/contador_rechaza/" method="POST">
                                                 {% csrf_token %}
                                                 <input type="hidden" id="id_detven" name="id_detven" value="{{i.id_detven}}">
                                                 <button value="submit" type="submit" name="submit2" class="btn btn-danger btn-sm">RECHAZAR PEDIDO</button>
@@ -69,10 +70,57 @@
                         </tbody>
                         {%endif%}
                     {%endfor%}
-                  </table>
+                </table>
+                <h2>Pedidos Pagados</h2>
+                <table class="table table-success table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID_PRODUCTO|ID_CLIENTE</th>
+                        <th scope="col">FECHA</th>
+                        <th scope="col">CANTIDAD</th>
+                        <th scope="col">ESTADO</th>
+                        <th scope="col">TIPO PAGO</th>
+                        <th scope="col center">Accion</th>
+                        </tr>
+                    </thead>
+                    {% for i in data %}
+                    
+                        {%if i.estado_det == "Pagado" %}
+                        <tbody>
+                            <tr>
+                                <th scope="row">{{i.id_detven}}</th>
+                                <td>{{i.producto_det}} | {{i.user_det}}</td>
+                                <td>{{i.hora_det}} | {{i.fecha_det}}</td>
+                                <td>{{i.cantidad_det}}</td>
+                                <td>{{i.estado_det}}</td>
+                                <td>{{i.tipoPago.pago_tpag}}</td>
+                                <td>
+                                    <div class="row" >
+                                        <div class="col text-center" role="group" aria-label="Basic example">
+                                            <form id="login-form2" class="form" action="/contador_aprueba/" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" id="id_detven" name="id_detven" value="{{i.id_detven}}">
+                                                <button value="submit" type="submit" name="submit2" class="btn btn-success btn-sm">PEDIDO PAGADO</button>
+                                            </form>
+                                        </div>
+                                        <div class="col text-center" role="group" aria-label="Basic example">
+                                            <form id="login-form2" class="form" action="/contador_rechaza/" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" id="id_detven" name="id_detven" value="{{i.id_detven}}">
+                                                <button value="submit" type="submit" name="submit2" class="btn btn-danger btn-sm">RECHAZAR PEDIDO</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {%endif%}
+                    {%endfor%}
+                </table>
                 
             </div>
-            <div class="container">
+            <!--<div class="container">
                 <div class="col">
                     <div class="card text-center" >
                         <h3 >Vendedores Disponibles En Sucursal</h3>
@@ -86,7 +134,7 @@
                     <br><br><br>
                 </div>
                 
-            </div>
+            </div>-->
             <hr>
         </tbody>
                     

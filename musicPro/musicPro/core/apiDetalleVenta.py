@@ -10,7 +10,7 @@ def getAllDetVentas():
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             data = respuesta.json()
-            pprint(data)
+            #pprint(data)
             print(print("se logró"+ str(respuesta)))
         else:
             print(print("NO se logró" + str(respuesta)))
@@ -29,7 +29,7 @@ def getDetVenta(id):
             print(print("se logró"+ str(respuesta)))
             data = respuesta.json()
             print(str(respuesta))
-            print(data)
+            #print(data)
             return data
         else:
             print(print("NO se logró, id no encontrada"+ str(respuesta)))
@@ -66,54 +66,49 @@ def getVentaByDetalle(detalle):
         
 #getVentaByDetalle("guitarra");
 
-def loadDetVenta(producto_det,user_det,hora_det,fecha_det,tipopago_id_tpag,id_detVen):
+def loadDetVenta(producto_det,user_det,hora_det,fecha_det,cantidad_det,estado_det,tipopago_id_tpag):
     try:
         url="https://springbootventas.herokuapp.com/loadDetalleVenta"
         respuesta = False
     
-        if len(id_detVen) <= 10:
-            dato = {"producto_det": producto_det,"user_det": user_det,"hora_det": hora_det,"fecha_det": fecha_det,
-            "tipopago_id_tpag": tipopago_id_tpag,"id_detVen": id_detVen}
-            respuesta = requests.post(url, json = dato )
-            if respuesta.status_code == 200:
-                print(print("se logró"+ str(respuesta)))
-            else:
-                print(print("NO se logró, id no encontrada"+ str(respuesta)))
+        dato = {"producto_det": producto_det,"user_det": user_det,"hora_det": hora_det,"fecha_det": fecha_det,"cantidad_det":cantidad_det,
+        "estado_det":estado_det,"tipoPago": tipopago_id_tpag}
+        respuesta = requests.post(url, json = dato )
+        if respuesta.status_code == 200:
+            print(print("se logró"+ str(respuesta)))
         else:
-            print("el largo del rut excede el maximo")
+            print(print("NO se logró, id no encontrada"+ str(respuesta)))
+        
     except Exception as e:
         print("No se logró")
         print(e)
         data = False
-        pprint(data)
+        #pprint(data)
     return  respuesta
       
 #loadDetVenta("Bateria","Vanesuki","16:38","02/01/2022","1","15")  
 
-def updateDetVenta(id_detVen,producto_det,user_det,hora_det,fecha_det,tipopago_id_tpag):
+def updateDetVenta(id_detven,producto_det,user_det,hora_det,cantidad_det,estado_det,fecha_det,tipoPago):
     try:
         url="https://springbootventas.herokuapp.com/updateDetalleVenta"
         respuesta = False
-    
-        if len(id_detVen) <= 10:
-            dato = {"id_detVen": id_detVen,"producto_det": producto_det,"user_det": user_det,"hora_det": hora_det,"fecha_det": fecha_det,
-            "tipopago_id_tpag": tipopago_id_tpag}
-            respuesta = requests.put(url, json = dato )
-            if respuesta.status_code == 200:
-                print(print("se logró"+ str(respuesta)))
-            else:
-                print(print("NO se logró, id no encontrada"+ str(respuesta)))
+        dato = {"id_detven":id_detven,"producto_det": producto_det,"user_det": user_det,"hora_det": hora_det,"cantidad_det":cantidad_det,"estado_det":estado_det,"fecha_det": fecha_det,"tipoPago": tipoPago}
+        respuesta = requests.put(url, json = dato )
+        if respuesta.status_code == 200:
+            pprint(dato)
+            print(print("se logró ACTUALIZAR"+ str(respuesta)))
         else:
-            print("el largo del rut excede el maximo")
+            print(print("NO se logró ACTUALIZAR, id no encontrada"+ str(respuesta)))
+        
     except Exception as e:
         print("No se logró, hubo un error")
         print(e)
         data = False
-        pprint(data)
+        #pprint(data)
     return  respuesta  
 
 #getAllDetVentas()
-#updateDetVenta("4","Bateria","Vanesuki","11:38","02/01/2022","1")
+updateDetVenta("2","guitarra","vannesa","20:00","26/05/2022","1","Aceptado","2")
 
 
 #No funciona

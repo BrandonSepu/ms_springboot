@@ -20,25 +20,54 @@
 
     <div class="container" >
         
-        <h1>Productos Solicitados</h1>
+        <h1>Pedidos Solicitados | Bodeguero</h1>
         <hr>
         <tbody>
-            <h1> Productos: {{datalen}} </h1> 
+            
             <div class="card-group container">
-                {% for i in data %}
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <div class="box card">
-                        <div class="box cardImg">
-                            <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
-                        </div>
-                        <div class="info">
-                            <h3>{{i.nom_pro}}</h3>
-                            <p><span>{{i.tipo.nom_tipo}}</span> Stock: {{i.stock_pro}}</p>
-                            <p><span>{{i.des_pro}}</span>
-                        </div>
-                    </div>
-                </div>
-                {%endfor%}
+                
+                <table class="table table-success table-striped">
+                    <thead class="table-primary">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID_PRODUCTO|ID_CLIENTE</th>
+                        <th scope="col">FECHA</th>
+                        <th scope="col">CANTIDAD</th>
+                        <th scope="col">ESTADO</th>
+                        <th scope="col">TIPO PAGO</th>
+                        <th scope="col center">Accion</th>
+                      </tr>
+                    </thead>
+                    {% for i in data %}
+                        {%if i.estado_det == "Solicitud"%}
+                        <tbody>
+                            <tr>
+                                <th scope="row">{{i.id_detven}}</th>
+                                <td>{{i.producto_det}} | {{i.user_det}}</td>
+                                <td>{{i.hora_det}} | {{i.fecha_det}}</td>
+                                <td>{{i.cantidad_det}}</td>
+                                <td>{{i.estado_det}}</td>
+                                <td>{{i.tipoPago.pago_tpag}}</td>
+                                <td>
+                                    <div class="row" >
+                                        <div class="col text-center" role="group" aria-label="Basic example">
+                                            <form id="login-form2" class="form" action="/bodega_aprueba/" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" id="id_detven" name="id_detven" value="{{i.id_detven}}">
+                                                <button value="submit" type="submit" name="submit2" class="btn btn-success btn-sm">ACEPTAR PEDIDO</button>
+                                            </form>
+                                        </div>
+                                        <div class="col text-center" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-danger btn-sm">RECHAZAR PEDIDO</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {%endif%}
+                    {%endfor%}
+                  </table>
+                
             </div>
             <div class="container">
                 <div class="col">
@@ -53,14 +82,7 @@
                     </select>
                     <br><br><br>
                 </div>
-                <div class="row" >
-                    <div class="col text-center" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-success">APROBAR PEDIDO</button>
-                    </div>
-                    <div class="col text-center" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-danger">RECHAZAR PEDIDO</button>
-                    </div>
-                </div>
+                
             </div>
             <hr>
         </tbody>

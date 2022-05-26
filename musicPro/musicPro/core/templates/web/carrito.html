@@ -70,17 +70,26 @@
 </div>
 <div class="row text-center">
     <div class="col-6"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
-    <div class="col-6"><a href="{% url 'save_carrito' %}" class="btn btn-success">Guardar</a></div>
+    <form id="login-form2" class="form col" action="/save_carrito/" method="POST">
+      {% csrf_token %}
+      <input type="email" required id="email_user" name="email_user" placeholder="tucorreo@gmail.com">
+      <select type="text" value="Cambia" name="tipo_pago" class="form-control" id="tipo_pago">
+        <option value="" selected disabled hidden>Selecciona tipo pago</option>
+        {%for t in tipo_pago%}
+        <option>{{t.pago_tpag}}</option>
+        {%endfor%}
+      </select>
+      <button value="submit" type="submit" name="submit2" class="btn btn-success">Pagar</button>
+    </form>
 </div>
    
 </div>
       </div>
     </div>
           <a class="navbar-brand" href="{% url 'index' %}">Inicio <span class="sr-only"></span></a>
-          <a class="navbar-brand"  href="{% url 'productos' %}">Productos</span></a>
+          <a class="navbar-brand" href="{% url 'carrito' %}">Productos</a>
           <a class="navbar-brand"  href="{% url 'productos' %}">Nosotros</a>
           <a class="navbar-brand"  href="{% url 'productos' %}">Contáctanos</a>
-          <a class="navbar-brand"  href="{% url 'data_user' %}">Usuarios</a>
           <a class="navbar-brand"  href="{% url 'login' %}">Iniciar sesion</a>
           <a class="navbar-brand"  href="{% url 'register' %}">/ Registrarse</a>
           
@@ -111,7 +120,7 @@
                             <h3>{{i.nom_pro}}</h3>
                             <p><span>{{i.tipo.nom_tipo}}</span> Stock: {{i.stock_pro}}</p>
                             <p><span>{{i.des_pro}}</span>
-                            <p><span>{{i.pric_pro}} CLP</span>
+                            <p><span>{{i.pric_pro}} CLP | {{usd}}/1 USD</span>
                             <form id="login-form2" class="form" action="/agregar_producto1/" method="POST">
                               {% csrf_token %}
                               <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">

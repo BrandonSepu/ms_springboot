@@ -10,8 +10,8 @@ def getAllTipoPago():
         respuesta = requests.get(url)
         if respuesta.status_code == 200:
             data = respuesta.json()
-            pprint(data)
-            print(print("se logró"+ str(respuesta)))
+            #pprint(data)
+            #print(print("se logró"+ str(respuesta)))
         else:
             print(print("NO se logró" + str(respuesta)))
         return data

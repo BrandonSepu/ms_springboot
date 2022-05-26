@@ -5,12 +5,16 @@ from pprint import pprint
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 import json
+from core.dolar import dolar
 from core.Carrito import Carrito
 from core.apiProducto import delProductoById, getAllPro, getProducto, loadProducto, updateProducto
+from core.apiTipoPago import getAllTipoPago
 from core.apiTipoProducto import getAllTipoPro
+from core.apiDetalleVenta import getAllDetVentas, getDetVenta, loadDetVenta, updateDetVenta
 from core.apiUser import delUserById, getAllUsers, getUserByEmail, loadUser, login, updateUser
 from django.contrib import messages
 from core.models import Producto
+import time
 
 # Create your views here.
 #GENERALES
@@ -42,9 +46,9 @@ def loginning(request):
             elif data["tipo_user"] == "Bodeguero": 
                 return redirect("bodega")
             elif data["tipo_user"] == "Vendedor": 
-                return redirect("re_vende")
+                return redirect("vendedor")
             elif data["tipo_user"] == "Contador": 
-                return redirect("venta")
+                return redirect("contador")
         else:
             print("Ocurrio un error: " + str(status))
             messages.add_message(request=request, level=messages.ERROR, message="DATOS INCORRECTOS")
@@ -164,18 +168,18 @@ def reg_product(request):
     context = {"data":data}
     return render(request, 'product/reg_product.html', context)
 
+#BODEGA
 def bodega(request):
 
-    datalen = len(getAllPro())
-    data = getAllPro()
+    datalen = len(getAllDetVentas())
+    data = getAllDetVentas()
     users = getAllUsers()
     vendedores = []
     for u in users:
         if u["tipo_user"] == "Vendedor":
             vendedores.append(u)
-            print(vendedores)
-        else:
-            print("no es un vendedor")
+            #print(vendedores)
+    
     
     context = {"data" : data,
                 "datalen" : datalen,
@@ -183,6 +187,20 @@ def bodega(request):
                 }
 
     return render(request, 'bode/bodega.html', context)
+
+def bodega_aprueba(request):
+    id_detven = request.POST["id_detven"]
+    data = getDetVenta(id_detven)
+    producto_det = data["producto_det"]
+    user_det = data["user_det"]
+    hora_det = data["hora_det"]
+    fecha_det = data["fecha_det"]
+    cantidad_det = data["cantidad_det"]
+    estado_det = "Aceptado"
+    tipoPago = data["tipoPago"]
+    updateDetVenta(id_detven,producto_det,user_det,hora_det,cantidad_det,estado_det,fecha_det,tipoPago)
+    return redirect("bodega")
+
 
 def registering_pro(request):
     try:
@@ -302,6 +320,95 @@ def venta(request):
 def re_admin(request):
     return render(request, 'redirect/re_admin.html')
 
+#VENDEDOR
+def vendedor(request):
+    datalen = len(getAllDetVentas())
+    data = getAllDetVentas()
+    users = getAllUsers()
+    vendedores = []
+    for u in users:
+        if u["tipo_user"] == "Contador":
+            vendedores.append(u)
+            #print(vendedores)
+    
+    
+    context = {"data" : data,
+                "datalen" : datalen,
+                "vendedores" : vendedores
+                }
+    return render(request, 'vende/vendedor.html', context)
+
+
+def vendedor_aprueba(request):
+    id_detven = request.POST["id_detven"]
+    data = getDetVenta(id_detven)
+    producto_det = data["producto_det"]
+    user_det = data["user_det"]
+    hora_det = data["hora_det"]
+    fecha_det = data["fecha_det"]
+    cantidad_det = data["cantidad_det"]
+    estado_det = "Aprobado"
+    tipoPago = data["tipoPago"]
+    updateDetVenta(id_detven,producto_det,user_det,hora_det,cantidad_det,estado_det,fecha_det,tipoPago)
+    return redirect("vendedor")
+
+def vendedor_rechaza(request):
+    id_detven = request.POST["id_detven"]
+    data = getDetVenta(id_detven)
+    producto_det = data["producto_det"]
+    user_det = data["user_det"]
+    hora_det = data["hora_det"]
+    fecha_det = data["fecha_det"]
+    cantidad_det = data["cantidad_det"]
+    estado_det = "Solicitud"
+    tipoPago = data["tipoPago"]
+    updateDetVenta(id_detven,producto_det,user_det,hora_det,cantidad_det,estado_det,fecha_det,tipoPago)
+    return redirect("vendedor")
+
+#CONTADOR
+def contador(request):
+    datalen = len(getAllDetVentas())
+    data = getAllDetVentas()
+    users = getAllUsers()
+    vendedores = []
+    for u in users:
+        if u["tipo_user"] == "Contador":
+            vendedores.append(u)
+            #print(vendedores)
+    
+    
+    context = {"data" : data,
+                "datalen" : datalen,
+                "vendedores" : vendedores
+                }
+    return render(request, 'cont/contador.html', context)
+
+def contador_aprueba(request):
+    id_detven = request.POST["id_detven"]
+    data = getDetVenta(id_detven)
+    producto_det = data["producto_det"]
+    user_det = data["user_det"]
+    hora_det = data["hora_det"]
+    fecha_det = data["fecha_det"]
+    cantidad_det = data["cantidad_det"]
+    estado_det = "Pagado"
+    tipoPago = data["tipoPago"]
+    updateDetVenta(id_detven,producto_det,user_det,hora_det,cantidad_det,estado_det,fecha_det,tipoPago)
+    return redirect("contador")
+
+def contador_rechaza(request):
+    id_detven = request.POST["id_detven"]
+    data = getDetVenta(id_detven)
+    producto_det = data["producto_det"]
+    user_det = data["user_det"]
+    hora_det = data["hora_det"]
+    fecha_det = data["fecha_det"]
+    cantidad_det = data["cantidad_det"]
+    estado_det = "Aprobado"
+    tipoPago = data["tipoPago"]
+    updateDetVenta(id_detven,producto_det,user_det,hora_det,cantidad_det,estado_det,fecha_det,tipoPago)
+    return redirect("contador")
+
 
 #Admin
 def informes(request):
@@ -316,8 +423,10 @@ def informes(request):
 def carrito(request):
     #return HttpResponse("Hola Pythonizando"
     productos = Producto.objects.all()
+    tipo_pago = getAllTipoPago()
     data = getAllPro()
-    context = {"data" : data,'productos':productos}
+    usd = dolar()
+    context = {"data" : data,'productos':productos, "tipo_pago":tipo_pago, "usd":usd}
     return render(request, "web/carrito.html", context)
 
 
@@ -353,12 +462,26 @@ def save_carrito(request):
     carrito = Carrito(request)
     carrito.guardar_carrito
     data = (carrito.__dict__)
+    email_user = request.POST["email_user"]
+    tipo_pago = request.POST["tipo_pago"]
+    tpag = getAllTipoPago()
+    for t in tpag:
+        if t["pago_tpag"] == tipo_pago:
+            tipo_pago_final = t
+    
+    #print(tipo_pago_final)
+
+    user = getUserByEmail(email_user)
     
     for d in data["carrito"]:
         
         id_pro = (int(d))
         product = getProducto(d)
-        
+        #pprint(product)
+        loadDetVenta(product["id_pro"],user["id_user"],str(time.strftime('%H:%M:%S', time.localtime())),str(time.strftime('%Y-%m-%d', time.localtime())),1,"Solicitud",tipo_pago_final)
 
+    
+    carrito = Carrito(request)
+    carrito.limpiar()    
 
     return redirect("carrito")
