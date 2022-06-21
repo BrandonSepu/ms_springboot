@@ -1,6 +1,6 @@
 from django.urls import include, path
-
 from . import views
+
 
 urlpatterns = [
     path("base/", views.base, name="base"),
@@ -48,10 +48,8 @@ urlpatterns = [
     path("contador/", views.contador, name="contador"),
     path("contador_aprueba/", views.contador_aprueba, name="contador_aprueba"),
     path("contador_rechaza/", views.contador_rechaza, name="contador_rechaza"),
+    #WEBPAY_PLUS
 
-
-    
-    
 ]
 '''path("carrito/", views.carrito , name="carrito"),
     '''
