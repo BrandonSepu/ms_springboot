@@ -166,7 +166,10 @@ def pagoAprobado(email, password, account, balance):
         balClient = balanceByClient(clientFound["id_cli"])
         for bc in balClient:
             if account == bc["id_acc"]["name_acc"]:
-                cashBalance = bc["id_acc"]["name_acc"]
+                if balance <= bc["balance_bal"]:
+                    print("si alcanzas a comprar")
+                else:
+                    print("no te alcanza el dinero")
                 break
             else:
                 print("no sirve")
