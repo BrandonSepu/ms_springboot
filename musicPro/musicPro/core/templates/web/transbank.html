@@ -1,0 +1,63 @@
+{% load static %}
+{% block contenido %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% endblock css %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="text-center alert-success bg-success {{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <br>
+    <hr>
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="/pagar/" method="POST">
+                            {% csrf_token %}
+                            <h2 class="text-center text-info">TRANSBANK - PAGO</h2>
+							<div class="form-group">
+                                <label for="Nombre" class="text-info">RUT:</label><br>
+                                <input type="text" name="rut_cli" id="rut_cli" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <select type="text" name="id_bank" class="form-control" id="id_bank" required>
+                                    <option hidden>SELECCIONA EL BANCO</option>
+                                    {%for b in bank %}
+                                        <option value="{{b.name_bank}}">{{b.name_bank}}</option>
+                                        <!--<option value="DEBITO">DEBITO</option>
+                                        <option value="CREDITO">CREDITO</option>
+                                        <option value="AHORRO">AHORRO</option>-->
+                                    {%endfor%}
+                                </select>
+                            </div>
+                            <!--<div class="form-group">
+                                <select type="text" name="name_acc" class="form-control" id="name_acc" required>
+                                    <option hidden>TIPO DE CUENTA</option>
+                                    <option value="DEBITO">DEBITO</option>
+                                    <option value="CREDITO">CREDITO</option>
+                                    <option value="AHORRO">AHORRO</option>
+                                </select>
+                            </div>-->
+                            <div class="form-group">
+                                <label for="password" class="text-info">CONTRASEÑA:</label><br>
+                                <input type="password" name="password_cli" id="password_cli" class="form-control" required>
+                            </div>
+                            <div id="register-link" class="text-center">
+                                <input type="submit" name="submit" class="text-center btn btn-info btn-md " value="pagar">
+                            </div>
+							<hr>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %} 

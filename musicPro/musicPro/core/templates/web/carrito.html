@@ -79,7 +79,7 @@
         <option>{{t.pago_tpag}}</option>
         {%endfor%}
       </select>
-      <button value="submit" href="https://mpago.la/1GsvDi4" type="submit" name="submit2" class="btn btn-success">Pagar</button>
+      <button value="submit" href="{% url 'transbank' %}" type="submit" name="submit2" class="btn btn-success">Pagar</button>
     </form>
 </div>
    
@@ -109,21 +109,20 @@
     </div>
     <div class="container">
         <div class="row">
-            {% for i in data %}
-        
+            {% for i in data2 %}
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="box card">
                         <div class="box cardImg">
-                            <img src="data:image/jpeg;base64,{{i.img_pro}}" class="card-img-top" alt="...">
+                            <img src="data:image/jpeg;base64,{{i.product.pr.img_pro}}" class="card-img-top" alt="...">
                         </div>
                         <div class="info">
                             <h3>{{i.nom_pro}}</h3>
-                            <p><span>{{i.tipo.nom_tipo}}</span> Stock: {{i.stock_pro}}</p>
-                            <p><span>{{i.des_pro}}</span>
-                            <p><span>{{i.pric_pro}} CLP | {{usd}}/1 USD</span>
+                            <p><span>{{i.product.pr.tipo.nom_tipo}}</span> Stock: {{i.product.pr.stock_pro}}</p>
+                            <p><span>{{i.product.pr.des_pro}}</span>
+                            <p><span>{{i.product.pr.pric_pro}} CLP | {{i.product.usdPrice}}/ USD</span>
                             <form id="login-form2" class="form" action="/agregar_producto1/" method="POST">
                               {% csrf_token %}
-                              <input type="hidden" id="id_pro" name="id_pro" value="{{i.id_pro}}">
+                              <input type="hidden" id="id_pro" name="id_pro" value="{{i.product.pr.id_pro}}">
                               <button value="submit" type="submit" name="submit2" class="btn btn-success btn-filter" data-target="cancelado">Lo quiero!</button>
                             </form>
                         </div>

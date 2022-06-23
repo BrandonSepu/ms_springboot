@@ -48,7 +48,9 @@ urlpatterns = [
     path("contador/", views.contador, name="contador"),
     path("contador_aprueba/", views.contador_aprueba, name="contador_aprueba"),
     path("contador_rechaza/", views.contador_rechaza, name="contador_rechaza"),
-    #WEBPAY_PLUS
+    #TRANSBANK
+    path("transbank/", views.transbank, name="transbank"),
+    path("pagar/", views.pagar, name="pagar"),
 
 ]
 '''path("carrito/", views.carrito , name="carrito"),

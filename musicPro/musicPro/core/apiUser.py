@@ -67,6 +67,33 @@ def getUserByEmail(email):
         
 #getUserByEmail("harry@gmail.com");
 
+def getUserByRut(rut):
+    try:
+        key="users"
+        url="https://springbootusers.herokuapp.com/" + key
+        data=False
+        respuesta = requests.get(url)
+        if respuesta.status_code == 200:
+            #print(print("se logró"+ str(respuesta)))
+            data = respuesta.json()
+            for i in data:
+                if i["rut_user"] == rut:
+                    print("lo encontre")
+                    data = i
+                    #print(data)
+                    break
+                else:
+                    print("NO lo encontre")
+                    data = False
+                    #pprint(data) 
+        else:
+            print(print("NO se logró, id no encontrada"+ str(respuesta))) 
+        return data
+    except Exception as e:
+        print(e)
+        
+#getUserByEmail("harry@gmail.com");
+
 def login(email, password):
     try:
         key="users"

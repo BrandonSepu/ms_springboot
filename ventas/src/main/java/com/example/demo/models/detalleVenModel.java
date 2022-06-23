@@ -25,6 +25,8 @@ public class detalleVenModel implements Serializable{
     private String estado_det;
     @Column(name = "fecha_det")
     private String fecha_det;
+    @Column(name = "price_det")
+    private int price_det;
     @ManyToOne
     @JoinColumn(name = "tipopago.id_tpag")
     private tipoPagoModel tipoPago;
@@ -32,13 +34,15 @@ public class detalleVenModel implements Serializable{
     public detalleVenModel() {
     }
 
-    public detalleVenModel(String producto_det, String user_det, String hora_det, String cantidad_det, String estado_det, String fecha_det, tipoPagoModel tipoPago) {
+    public detalleVenModel(int id_detven, String producto_det, String user_det, String hora_det, String cantidad_det, String estado_det, String fecha_det, int price_det, tipoPagoModel tipoPago) {
+        this.id_detven = id_detven;
         this.producto_det = producto_det;
         this.user_det = user_det;
         this.hora_det = hora_det;
         this.cantidad_det = cantidad_det;
         this.estado_det = estado_det;
         this.fecha_det = fecha_det;
+        this.price_det = price_det;
         this.tipoPago = tipoPago;
     }
 
@@ -104,5 +108,13 @@ public class detalleVenModel implements Serializable{
 
     public void setTipoPago(tipoPagoModel tipoPago) {
         this.tipoPago = tipoPago;
+    }
+
+    public int getPrice_det() {
+        return price_det;
+    }
+
+    public void setPrice_det(int price_det) {
+        this.price_det = price_det;
     }
 }

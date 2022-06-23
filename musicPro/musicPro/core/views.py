@@ -1,20 +1,22 @@
-
 import base64
-from contextlib import ContextDecorator
-from pprint import pprint
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
 import json
+from pprint import pprint
+from django.shortcuts import redirect, render
 from core.dolar import dolar
 from core.Carrito import Carrito
 from core.apiProducto import delProductoById, getAllPro, getProducto, loadProducto, updateProducto
 from core.apiTipoPago import getAllTipoPago
 from core.apiTipoProducto import getAllTipoPro
-from core.apiDetalleVenta import getAllDetVentas, getDetVenta, loadDetVenta, updateDetVenta
+from core.apiDetalleVenta import getAllDetVentas, getDetVenta, loadDetVenta, updateDetVenta, delDetVentaById
 from core.apiUser import delUserById, getAllUsers, getUserByEmail, loadUser, login, updateUser
 from django.contrib import messages
 from core.models import Producto
 import time
+from core.apiTransbank import getAllBank
+from core.apiTransbank import getAllAccount
+from core.apiUser import getUserByRut
+from core.apiTransbank import pagoAprobado
+from core.reportePDF import generarReporte
 
 # Create your views here.
 #GENERALES
@@ -412,7 +414,13 @@ def contador_rechaza(request):
 
 #Admin
 def informes(request):
-    return render(request, 'admin/informes.html')
+    try:
+        generarReporte()
+    except Exception as e:
+        print("No se logró, hubo un error")
+        print(e)
+
+    return redirect("re_admin")
 
 
 
@@ -426,7 +434,12 @@ def carrito(request):
     tipo_pago = getAllTipoPago()
     data = getAllPro()
     usd = dolar()
-    context = {"data" : data,'productos':productos, "tipo_pago":tipo_pago, "usd":usd}
+    data2 = []
+    for d in data:
+        data2.append({"product":{"pr":d,"usdPrice" : round((float(d["pric_pro"])/float(usd)),0)}})
+    for d2 in data2:
+        pprint(d2["product"]["usdPrice"])
+    context = {"data" : data,"data2":data2,'productos':productos, "tipo_pago":tipo_pago}
     return render(request, "web/carrito.html", context)
 
 
@@ -459,6 +472,7 @@ def limpiar_carrito(request):
     return redirect("carrito")
 
 def save_carrito(request):
+
     carrito = Carrito(request)
     carrito.guardar_carrito
     data = (carrito.__dict__)
@@ -474,14 +488,64 @@ def save_carrito(request):
     user = getUserByEmail(email_user)
     
     for d in data["carrito"]:
-        
         id_pro = (int(d))
         product = getProducto(d)
         #pprint(product)
-        loadDetVenta(product["id_pro"],user["id_user"],str(time.strftime('%H:%M:%S', time.localtime())),str(time.strftime('%Y-%m-%d', time.localtime())),1,"Solicitud",tipo_pago_final)
+        loadDetVenta(product["id_pro"],user["id_user"],str(time.strftime('%H:%M:%S', time.localtime())),str(time.strftime('%Y-%m-%d', time.localtime())),1,"Solicitud",product["pric_pro"],tipo_pago_final)
 
     
     carrito = Carrito(request)
     carrito.limpiar()    
 
-    return redirect("carrito")
+    return redirect("transbank")
+
+def transbank(request):
+    bank = getAllBank()
+    account = getAllAccount()
+    context = {'bank' : bank,
+                'account' : account}
+    return render(request, "web/transbank.html", context)
+
+def pagar(request):
+    try:
+        rut = request.POST["rut_cli"]
+        password = request.POST["password_cli"]
+        bank = request.POST["id_bank"]
+        #account = request.POST["name_acc"]
+        userData = {}
+        user = getUserByRut(rut)
+        #print("id user :  " + str(user["id_user"]))
+        detalleVentas = getAllDetVentas()
+        for dv in detalleVentas:
+            if dv["user_det"] == str(user["id_user"]):
+                userData.update(dv)
+                #print("si sirve")
+
+        id_detven = userData["id_detven"]
+        producto_det = userData["producto_det"]
+        user_det = userData["user_det"]
+        hora_det = userData["hora_det"]
+        cantidad_det = userData["cantidad_det"]
+        estado_det = userData["estado_det"]
+        fecha_det = userData["fecha_det"]
+        price_det = userData["price_det"]
+        price = userData["price_det"]
+        tipopago_id_tpag = userData["tipoPago"]
+
+        account = userData["tipoPago"]["pago_tpag"]
+        estado_det = (userData["tipoPago"])
+        data = {"rut": rut,"password":password,"account":account.upper(),"price":price}
+        print(data)
+        #print(price)
+        if pagoAprobado(rut,password,bank,account.upper(),price) == True:
+            print("se pago correctamente en transbank")
+            updateDetVenta(id_detven,producto_det,user_det,hora_det,fecha_det,cantidad_det,estado_det,price_det,tipopago_id_tpag)
+            return redirect("index")
+        else:
+            print("no se realizo el pago, elminamos la compra")
+            delDetVentaById(userData["id_detven"])
+            return redirect("carrito")
+    except Exception as e:
+        print("No se logró, hubo un error")
+        print(e)
+        return redirect("transbank")

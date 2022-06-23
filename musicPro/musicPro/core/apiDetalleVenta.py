@@ -66,13 +66,13 @@ def getVentaByDetalle(detalle):
         
 #getVentaByDetalle("guitarra");
 
-def loadDetVenta(producto_det,user_det,hora_det,fecha_det,cantidad_det,estado_det,tipopago_id_tpag):
+def loadDetVenta(producto_det,user_det,hora_det,fecha_det,cantidad_det,estado_det,price_det,tipopago_id_tpag):
     try:
         url="https://springbootventas.herokuapp.com/loadDetalleVenta"
         respuesta = False
     
         dato = {"producto_det": producto_det,"user_det": user_det,"hora_det": hora_det,"fecha_det": fecha_det,"cantidad_det":cantidad_det,
-        "estado_det":estado_det,"tipoPago": tipopago_id_tpag}
+        "estado_det":estado_det,"price_det":price_det,"tipoPago": tipopago_id_tpag}
         respuesta = requests.post(url, json = dato )
         if respuesta.status_code == 200:
             print(print("se logró"+ str(respuesta)))
@@ -88,11 +88,13 @@ def loadDetVenta(producto_det,user_det,hora_det,fecha_det,cantidad_det,estado_de
       
 #loadDetVenta("Bateria","Vanesuki","16:38","02/01/2022","1","15")  
 
-def updateDetVenta(id_detven,producto_det,user_det,hora_det,cantidad_det,estado_det,fecha_det,tipoPago):
+def updateDetVenta(id_detven,producto_det,user_det,hora_det,fecha_det,cantidad_det,estado_det,price_det,tipopago_id_tpag):
     try:
         url="https://springbootventas.herokuapp.com/updateDetalleVenta"
         respuesta = False
-        dato = {"id_detven":id_detven,"producto_det": producto_det,"user_det": user_det,"hora_det": hora_det,"cantidad_det":cantidad_det,"estado_det":estado_det,"fecha_det": fecha_det,"tipoPago": tipoPago}
+        dato = {"id_detven":id_detven,"producto_det": producto_det,"user_det": user_det,
+        "hora_det": hora_det,"cantidad_det":cantidad_det,"estado_det":estado_det,"fecha_det": fecha_det,
+        "price_det":price_det,"tipoPago":tipopago_id_tpag}
         respuesta = requests.put(url, json = dato )
         if respuesta.status_code == 200:
             pprint(dato)
@@ -108,11 +110,11 @@ def updateDetVenta(id_detven,producto_det,user_det,hora_det,cantidad_det,estado_
     return  respuesta  
 
 #getAllDetVentas()
-updateDetVenta("2","guitarra","vannesa","20:00","26/05/2022","1","Aceptado","2")
+#updateDetVenta("2","guitarra","vannesa","20:00","26/05/2022","1","Aceptado","2")
 
 
 #No funciona
-def delVentaById(id):
+def delDetVentaById(id):
     try:
         data = getDetVenta(id)
         respuesta = False

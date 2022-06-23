@@ -1,5 +1,6 @@
 django
 transbank-sdk==3.0.0
+-U arrow
 
 #pip install -r requirements.txt
 #project01\Scripts\activate

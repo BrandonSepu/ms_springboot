@@ -66,6 +66,26 @@ def getAllBalance():
 #getAllBank()
 #getAllClient()
 
+#UPDATES
+def updateBalance(id_bal,balance_bal,id_acc,id_cli):
+    try:
+        url="https://springboottransbank.herokuapp.com/updateBalance"
+        status = False
+        dato = {'id_bal': id_bal,"balance_bal":balance_bal,"id_acc":id_acc,"id_cli":id_cli}
+        respuesta = requests.put(url, json = dato )
+        if respuesta.status_code == 200:
+            print(print("se logró"+ str(respuesta)))
+            status = True
+        else:
+            print(print("NO se logró, id no encontrada"+ str(respuesta)))
+            status = False
+    except Exception as e:
+        print("No se logró, hubo un error")
+        print(e)
+        status = False
+    return  status
+
+
 #GET ONE
 def getClient(id):
     try:
@@ -149,34 +169,39 @@ def balanceByClient(idClient):
 
 #PAGO APROBADO
 
-def pagoAprobado(email, password, account, balance):
-    status = False
-    client = getAllClient()
-    for c in client:
-        if c["email_cli"] == email and c["pass_cli"] == password:
-            status = True
-            clientFound = c
-            #print(clientFound)
-            print("Usuario valido...")
-            break
-        else:
-            print("usuario no encontrado")
-    if clientFound:
-        #print(int(clientFound["id_cli"]))
-        balClient = balanceByClient(clientFound["id_cli"])
-        for bc in balClient:
-            if account == bc["id_acc"]["name_acc"]:
-                if balance <= bc["balance_bal"]:
-                    print("si alcanzas a comprar")
-                else:
-                    print("no te alcanza el dinero")
-                break
-            else:
-                print("no sirve")
-    else:
+def pagoAprobado(rut, password, bank, account, balance):
+    try:
         status = False
-    
-    print(status)
-    return status
+        client = getAllClient()
+        for c in client:
+            if c["rut_cli"] == rut and c["pass_cli"] == password:
+                
+                clientFound = c
+                #print(clientFound)
+                print("Usuario valido...")
+                balClient = balanceByClient(clientFound["id_cli"])
+                for bc in balClient:
+                    print(account + " = " + bc["id_acc"]["name_acc"])
+                    print(bank + " = " + bc["id_acc"]["id_bank"]["name_bank"])
+                    if account == bc["id_acc"]["name_acc"] and bank == bc["id_acc"]["id_bank"]["name_bank"]:
+                        if balance <= bc["balance_bal"]:
+                            saldo = bc["balance_bal"] - balance
+                            print(saldo) 
+                            updateBalance(bc["id_bal"],saldo,bc["id_acc"],bc["id_cli"])
+                            print("Articulo comprado - Exitoso")
+                            #print(getBalance(bc["id_bal"]))
+                            #metodo para ingresar dinero a la ceutna de musicpro
+                            status = True
+                            break
+                        else:
+                            print("no te alcanza el dinero")
+                    else:
+                        print("la cuenta o el banco ingresado no existe")
+                break
+        #print(status)
+        return status
+    except Exception as e:
+        print("No se logró, hubo un error")
+        print(e)
 
-pagoAprobado("dcorish0@java.com","Devi","CREDITO",1)
+#pagoAprobado("dcorish0@java.com","Devi","BANCO ESTADO","CREDITO",1)
